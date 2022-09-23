@@ -1,0 +1,15 @@
+.admin-sidebar {
+    width: 20%;
+    height: 100%;
+    .nav-list {
+        .nav-item {
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            img {
+                width: 20px;
+                margin-right: 10px;
+            }
+        }
+    }
+}

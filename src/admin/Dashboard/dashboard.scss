@@ -1,0 +1,23 @@
+.admin-wrapper {
+    .admin-header {
+    }
+    .admin-body {
+        .dashboard-list {
+            display: flex;
+            .dashboard-item {
+                display: flex;
+                align-items: center;
+                padding: 20px 20px;
+                margin-right: 20px;
+                cursor: pointer;
+                .icon {
+                    width: 25px;
+                    margin-right: 10px;
+                }
+                .arrow {
+                    width: 25px;
+                }
+            }
+        }
+    }
+}
