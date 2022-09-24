@@ -13,7 +13,6 @@ const siteReducer = (state = initalState, action) => {
         isLoginLoading: action.payload,
       };
     case SET_USER_DETAIL:
-      debugger
       return {
         ...state,
         userDetail: action.payload,

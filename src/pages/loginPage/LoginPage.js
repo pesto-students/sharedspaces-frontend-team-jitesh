@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import './loginPage.scss'
 import Input from '../../components/input/Input'
 import { Link, useNavigate } from 'react-router-dom'
@@ -11,6 +11,14 @@ const LoginPage = () => {
     const navigate = useNavigate()
     const [values, setValues] = useState({});
     const [loading, setLoading] = useState(false);
+
+    const userDetail = useSelector(state => state.site.userDetail)
+
+    useEffect(() => {
+        if (userDetail?.token) {
+            navigate("/")
+        }
+    }, [userDetail])
 
     const onInputChange = e => {
         setValues({

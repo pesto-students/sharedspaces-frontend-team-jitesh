@@ -1,3 +1,21 @@
 .rc-dropdown {
     font-family: "Poppins", sans-serif;
 }
+.dropdown-wrapper {
+    position: relative;
+    .user-image {
+        width: 28px;
+        border-radius: 50px;
+        margin-right: 5px;
+        margin-left: 2px;
+    }
+    .logout {
+        width: 28px;
+        margin-left: 15px;
+    }
+}
+.dropdown-body {
+    width: 150px;
+    position: fixed;
+    top: 65px;
+}

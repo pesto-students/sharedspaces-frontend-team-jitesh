@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Button from '../button/Button'
 import { Link } from 'react-router-dom'
@@ -6,8 +6,16 @@ import './navbar.scss'
 import AdminNavbar from '../adminNavbar/AdminNavbar';
 import ProfileDropdown from '../profileDropdown/ProfileDropdown'
 
+
 export default function Navbar(props) {
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const userDetail = useSelector(state => state.site.userDetail)
+
+    useEffect(() => {
+        if (userDetail) {
+            setIsUserLoggedIn(true)
+        }
+    }, [userDetail, userDetail?.token])
 
     const { location } = props;
     if (location?.pathname?.match(/login/) ||
@@ -36,17 +44,17 @@ export default function Navbar(props) {
                     ))}
                 </nav>
             </div>
-            {userDetail === null
+            {isUserLoggedIn
                 ? <div className="right-section flex items-center">
+                    <ProfileDropdown userDetail={userDetail} />
+                </div>
+                : <div className="right-section flex items-center">
                     <Link to="/login">
                         <Button buttonType="primary" className="mx-2">Login</Button>
                     </Link>
                     <Link to="/sign-up">
                         <Button buttonType="primary-outline" className="ml-2">Sign Up</Button>
                     </Link>
-                </div>
-                : <div className="right-section flex items-center">
-                    <ProfileDropdown userDetail={userDetail} />
                 </div>}
 
         </nav>

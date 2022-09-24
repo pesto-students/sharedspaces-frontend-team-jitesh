@@ -1,16 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import './signUpPage.scss'
 import Input from '../../components/input/Input'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { onRegister } from '../../store/actions/siteAction'
-import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify';
 import Button from '../../components/button/Button'
 
 const SignUpPage = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [values, setValues] = useState({});
     const [loading, setLoading] = useState(false);
+
+    const userDetail = useSelector(state => state.site.userDetail)
+
+    useEffect(() => {
+        if (userDetail?.token) {
+            navigate("/")
+        }
+    }, [userDetail])
 
     const onInputChange = e => {
         setValues({
@@ -40,7 +49,11 @@ const SignUpPage = () => {
             password
         };
 
-        dispatch(onRegister(data, (value) => setLoading(value)))
+        dispatch(
+            onRegister(data,
+                (value) => setLoading(value),
+                () => navigate("/"))
+        )
     };
     return (
         <div className='signup-wrapper flex'>

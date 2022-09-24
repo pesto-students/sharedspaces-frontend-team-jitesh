@@ -26,6 +26,10 @@ export const onLogin = (data, loading, navigate) => (dispatch) => {
       loading(false);
       if (res.data.status) {
         localStorage.setItem("ss_user", JSON.stringify(res.data.data));
+        dispatch({
+          type: SET_USER_DETAIL,
+          payload: res.data.data
+        })
         navigate()
         toast.success(res.data.message)
       } else {
@@ -46,6 +50,10 @@ export const onRegister = (data, loading, navigate) => (dispatch) => {
       loading(false);
       if (res.data.status) {
         localStorage.setItem("ss_user", JSON.stringify(res.data.data));
+        dispatch({
+          type: SET_USER_DETAIL,
+          payload: res.data.data
+        })
         navigate()
         toast.success(res.data.message);
       } else {
