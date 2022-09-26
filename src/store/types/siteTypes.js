@@ -1,3 +1,5 @@
 export const SET_LOGIN_LOADING = "SET_LOGIN_LOADING";
 
 export const SET_USER_DETAIL = "SET_USER_DETAIL";
+
+export const SET_ALL_PROPERTY = "SET_ALL_PROPERTY";

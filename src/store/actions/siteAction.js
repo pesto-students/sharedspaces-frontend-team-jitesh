@@ -1,5 +1,6 @@
 import Axios from "../../Axios";
 import {
+  SET_ALL_PROPERTY,
   SET_LOGIN_LOADING, SET_USER_DETAIL,
 } from "../types/siteTypes";
 import { toast } from 'react-toastify';
@@ -22,9 +23,9 @@ export const setLoginLoading = (data) => (dispatch) => {
 export const onLogin = (data, loading, navigate) => (dispatch) => {
   loading(true)
   try {
-    Axios.post('/users/login', data).then(res => {
+    Axios.post('/user/login', data).then(res => {
       loading(false);
-      if (res.data.status) {
+      if (res.data.success) {
         localStorage.setItem("ss_user", JSON.stringify(res.data.data));
         dispatch({
           type: SET_USER_DETAIL,
@@ -46,9 +47,9 @@ export const onLogin = (data, loading, navigate) => (dispatch) => {
 export const onRegister = (data, loading, navigate) => (dispatch) => {
   loading(true)
   try {
-    Axios.post('/users/signup', data).then(res => {
+    Axios.post('/user/signup', data).then(res => {
       loading(false);
-      if (res.data.status) {
+      if (res.data.success) {
         localStorage.setItem("ss_user", JSON.stringify(res.data.data));
         dispatch({
           type: SET_USER_DETAIL,
@@ -68,10 +69,31 @@ export const onRegister = (data, loading, navigate) => (dispatch) => {
 };
 
 
-// SET LOGIN LOADING
+// SET USER DETAILS
 export const setUserDetail = (data) => (dispatch) => {
   dispatch({
     type: SET_USER_DETAIL,
     payload: data,
   });
+};
+
+
+export const getAllProperty = (data, loading) => async (dispatch) => {
+  loading(true)
+  try {
+    const response = await Axios.post('/property/getAll', data)
+
+    if (response) {
+      dispatch({
+        type: SET_ALL_PROPERTY,
+        payload: response.data.data
+      })
+      loading(false)
+    } else {
+      loading(false)
+    }
+  } catch (error) {
+    console.log("error", error.response);
+    // toast.error(res.data.message);
+  }
 };

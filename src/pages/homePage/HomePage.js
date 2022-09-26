@@ -1,11 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import './homePage.scss'
 import SearchInput from "../../components/searchInput/SearchInput";
 import Button from "../../components/button/Button";
 import Footer from "../../components/footer/Footer";
 import { Link } from "react-router-dom";
+import { getAllProperty } from '../../store/actions/siteAction'
+import Loader from '../../components/loader/Loader'
 
 const HomePage = () => {
+  const dispatch = useDispatch()
+  const allProperties = useSelector(state => state.site.allProperties)
+
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    let data = {}
+    dispatch(getAllProperty(data, (value) => setLoading(value)))
+  }, [])
+
   return (
     <>
       <div className="homepage-wrapper">
@@ -44,46 +57,27 @@ const HomePage = () => {
                 Popular Properties
               </h1>
 
+              {loading &&
+                <div className="flex w-100 justify-center mt-10">
+                  <Loader width={"w-10"} className={"text-gray-200"} />
+                </div>
+              }
               <div className="property-list">
-                <div className="property-item bg-white shadow-new">
-                  <div className="property-image">
-                    <img src="/assets/images/property-one.png" alt="" />
-                  </div>
-                  <div className="property-description">
-                    <p className="text-lg font-bold">Regus Office Center</p>
-                    <p className="text-md text-gray-500">Home to downtown, New York</p>
-                    <hr className="my-3" />
-                    <div className="flex justify-end">
-                      <Button buttonType={"primary"}>Book</Button>
+                {allProperties?.slice(0, 3)?.map(property =>
+                  <Link to={`/property/${property._id}`} className="property-item bg-white shadow-new fade-in-bottom">
+                    <div className="property-image">
+                      <img src="/assets/images/property-one.png" alt="" />
                     </div>
-                  </div>
-                </div>
-                <div className="property-item bg-white shadow-new">
-                  <div className="property-image">
-                    <img src="/assets/images/property-two.png" alt="" />
-                  </div>
-                  <div className="property-description">
-                    <p className="text-lg font-bold">Regus Office Center</p>
-                    <p className="text-md text-gray-500">Home to downtown, New York</p>
-                    <hr className="my-3" />
-                    <div className="flex justify-end">
-                      <Button buttonType={"primary"}>Book</Button>
+                    <div className="property-description">
+                      <p className="text-lg font-bold">{property.propertyTitle}</p>
+                      <p className="text-md text-gray-500">{property.address}</p>
+                      <hr className="my-3" />
+                      <Link to={`/property/${property._id}`} className="flex justify-end">
+                        <Button buttonType={"primary"}>Book</Button>
+                      </Link>
                     </div>
-                  </div>
-                </div>
-                <div className="property-item bg-white shadow-new">
-                  <div className="property-image">
-                    <img src="/assets/images/property-three.png" alt="" />
-                  </div>
-                  <div className="property-description">
-                    <p className="text-lg font-bold">Regus Office Center</p>
-                    <p className="text-md text-gray-500">Home to downtown, New York</p>
-                    <hr className="my-3" />
-                    <div className="flex justify-end">
-                      <Button buttonType={"primary"}>Book</Button>
-                    </div>
-                  </div>
-                </div>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
