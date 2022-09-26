@@ -1,11 +1,11 @@
 import React from 'react'
-import './input.scss'
+import './textarea.scss'
 
-const Input = ({ name, value, type, id, placeholder, label, onChange, required, className }) => {
+const Textarea = ({ name, value, type, id, placeholder, label, onChange, required, className }) => {
     return (
-        <div className={`input-group mb-4 ${className}`}>
+        <div className={`textarea-group mb-4 ${className}`}>
             <label htmlFor={name}>{label}</label>
-            <input
+            <textarea
                 onChange={(e) => onChange(e)}
                 name={name}
                 value={value}
@@ -19,4 +19,4 @@ const Input = ({ name, value, type, id, placeholder, label, onChange, required, 
     )
 }
 
-export default Input
+export default Textarea

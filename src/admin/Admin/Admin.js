@@ -7,7 +7,7 @@ const Admin = () => {
     return (
         <div className="admin-wrapper">
             <AdminSidebar />
-            <div className='admin-section'>{<Outlet />}</div>
+            <div className='admin-section px-1 hide-scrollbar'>{<Outlet />}</div>
         </div>
     )
 }

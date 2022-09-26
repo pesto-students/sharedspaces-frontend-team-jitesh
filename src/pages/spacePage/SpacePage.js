@@ -24,7 +24,7 @@ const SpacePage = () => {
                     </div>
                 ) :
                 (
-                    <div className="space-wrapper">
+                    <div className="space-wrapper fade-in-bottom">
                         <Link to={`/property/${propertyId}`}>
                             <Button buttonType="primary-outline" className={'inline'}>Go Back</Button>
                         </Link>

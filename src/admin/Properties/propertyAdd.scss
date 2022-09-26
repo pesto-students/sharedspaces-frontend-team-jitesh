@@ -1,0 +1,17 @@
+.admin-body {
+    .admin-breadcrums {
+        display: flex;
+        align-items: center;
+        .arrow {
+            width: 20px;
+        }
+    }
+    .body-section {
+    }
+    .main-wrapper {
+        display: flex;
+        .left-section {
+            width: 50%;
+        }
+    }
+}
