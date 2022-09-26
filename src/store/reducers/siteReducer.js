@@ -1,6 +1,6 @@
 import {
   SET_ALL_PROPERTY,
-  SET_LOGIN_LOADING, SET_USER_DETAIL,
+  SET_LOGIN_LOADING, SET_PROPERTY, SET_USER_DETAIL,
 } from "../types/siteTypes";
 
 const initalState = {
@@ -22,6 +22,11 @@ const siteReducer = (state = initalState, action) => {
       return {
         ...state,
         allProperties: action.payload,
+      };
+    case SET_PROPERTY:
+      return {
+        ...state,
+        property: action.payload,
       };
     default:
       return state;
