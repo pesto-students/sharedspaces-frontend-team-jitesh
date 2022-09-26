@@ -1,7 +1,8 @@
 import Axios from "../../Axios";
 import {
   SET_ALL_PROPERTY,
-  SET_LOGIN_LOADING, SET_PROPERTY, SET_USER_DETAIL,
+  SET_ALL_SPACE,
+  SET_LOGIN_LOADING, SET_PROPERTY, SET_SPACE, SET_USER_DETAIL,
 } from "../types/siteTypes";
 import { toast } from 'react-toastify';
 
@@ -107,6 +108,48 @@ export const getProperty = (propertyId, loading) => async (dispatch) => {
     if (response) {
       dispatch({
         type: SET_PROPERTY,
+        payload: response.data.data
+      })
+      loading(false)
+    } else {
+      loading(false)
+    }
+  } catch (error) {
+    console.log("error", error.response);
+    // toast.error(res.data.message);
+  }
+};
+
+
+export const getAllSoace = (data, loading) => async (dispatch) => {
+  loading(true)
+  try {
+    const response = await Axios.post('/space/getAll', data)
+
+    if (response) {
+      dispatch({
+        type: SET_ALL_SPACE,
+        payload: response.data.data
+      })
+      loading(false)
+    } else {
+      loading(false)
+    }
+  } catch (error) {
+    console.log("error", error.response);
+    // toast.error(res.data.message);
+  }
+};
+
+
+export const getSpace = (spaceId, loading) => async (dispatch) => {
+  loading(true)
+  try {
+    const response = await Axios.get(`/space/${spaceId}`)
+
+    if (response) {
+      dispatch({
+        type: SET_SPACE,
         payload: response.data.data
       })
       loading(false)

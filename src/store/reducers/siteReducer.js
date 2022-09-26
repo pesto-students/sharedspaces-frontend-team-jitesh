@@ -1,9 +1,11 @@
 import {
   SET_ALL_PROPERTY,
-  SET_LOGIN_LOADING, SET_PROPERTY, SET_USER_DETAIL,
+  SET_ALL_SPACE,
+  SET_LOGIN_LOADING, SET_PROPERTY, SET_SPACE, SET_USER_DETAIL,
 } from "../types/siteTypes";
 
 const initalState = {
+  space: {}
 };
 
 const siteReducer = (state = initalState, action) => {
@@ -27,6 +29,16 @@ const siteReducer = (state = initalState, action) => {
       return {
         ...state,
         property: action.payload,
+      };
+    case SET_ALL_SPACE:
+      return {
+        ...state,
+        allSpace: action.payload,
+      };
+    case SET_SPACE:
+      return {
+        ...state,
+        space: action.payload,
       };
     default:
       return state;
