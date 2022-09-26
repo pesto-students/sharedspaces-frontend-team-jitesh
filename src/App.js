@@ -41,7 +41,13 @@ function App() {
 
 
         <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<SearchPage />} />
+
+        <Route path="/search/">
+          <Route path=":searchKeyword" element={<SearchPage />} />
+          <Route path="" element={<SearchPage />} />
+        </Route>
+
+
         <Route path="/property/:propertyId" element={<PropertyPage />} />
         <Route path="/space/:propertyId/:spaceId" element={<SpacePage />} />
 
