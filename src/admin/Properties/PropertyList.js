@@ -26,7 +26,7 @@ const PropertyList = () => {
                 <div className="flex justify-between">
                     <h1 className="heading text-lg font-bold mb-3">Properties</h1>
                     <Link to="/admin/property/add">
-                        <div className='bg-gray-900 text-white rounded padding px-4 py-1 text-sm cursor-pointer'>Add Property</div>
+                        <div className='bg-gray-300 rounded padding px-4 py-1 text-sm cursor-pointer hover:bg-gray-900 hover:text-white'>Add Property</div>
                     </Link>
                 </div>
 

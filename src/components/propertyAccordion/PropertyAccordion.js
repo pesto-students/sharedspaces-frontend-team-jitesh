@@ -5,21 +5,22 @@ import './propertyAccordion.scss'
 const PropertyAccordien = ({ property, spaces }) => {
     const [visible, setVisible] = useState(false)
     return (
-        <div className={`my-4 rounded shadow-new ${visible && false}`} onClick={() => setVisible(!visible)}>
+        <div className={`my-4 rounded shadow-new fade-in-bottom ${visible && false}`} onClick={() => setVisible(!visible)}>
             < div className={`rounded p-3 flex flex-row justify-between transition duration-150 ease-in-out ${visible ? "bg-red-100" : ""}`}>
                 <div className='flex self-center'>
                     <div >
-                        <img className='w-24 rounded mr-3' src="/assets/images/property-two.png" />
+                        <img className='w-32 rounded mr-3' src="/assets/images/property-two.png" />
                     </div>
-                    <div className='self-center'>
+                    <div className='text-left'>
                         <h6 className='font-bold text-base'>{property?.propertyTitle}</h6>
-                        <h6 className='text-sm font-light text-slate-400'>{property?.address}</h6>
+                        <h6 className='text-sm font-light text-slate-400 mb-3'>{property?.address}</h6>
+                        <Link to={`/property/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 text-xs hover:bg-gray-900 hover:text-white'>View in Site</Link>
                     </div>
                 </div>
                 <div className='flex justify-between self-center'>
-                    <Link to={`/admin/space/add/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs'>Add New Space</Link>
-                    <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs'>Edit Property</button>
-                    <button className='bg-red-300 rounded px-2 py-1 ml-3 text-xs'>Delete Property</button>
+                    <Link to={`/admin/space/add/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Add Space</Link>
+                    <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Edit Property</button>
+                    <button className='bg-red-200 text-red-600 rounded px-2 py-1 ml-3 text-xs hover:bg-red-500 hover:text-white'>Delete Property</button>
                 </div>
             </div>
             {
@@ -31,7 +32,7 @@ const PropertyAccordien = ({ property, spaces }) => {
                                 <div className="py-3 px-3 flex justify-between">
                                     <div className='flex item-center'>
                                         <div >
-                                            <img src="/assets/images/property-image.png" className='w-24 mr-5 rounded' />
+                                            <img src="/assets/images/property-three.png" className='w-24 mr-5 rounded' />
                                         </div>
                                         <div className='self-center'>
                                             <h6 className='font-bold text-base'>{item.spaceTitle}</h6>
@@ -39,8 +40,8 @@ const PropertyAccordien = ({ property, spaces }) => {
                                         </div>
                                     </div>
                                     <div className='flex justify-between self-center'>
-                                        <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs'>Edit Space</button>
-                                        <button className='bg-red-300 rounded px-2 py-1 ml-3 text-xs'>Delete Space</button>
+                                        <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Edit Space</button>
+                                        <button className='bg-red-200 text-red-600 rounded px-2 py-1 ml-3 text-xs hover:bg-red-500 hover:text-white'>Delete Space</button>
                                     </div>
                                 </div>
                             )

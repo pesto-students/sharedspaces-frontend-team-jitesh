@@ -50,7 +50,7 @@ const SearchPage = () => {
 
                                 <hr className="my-3" />
                                 <div className="flex justify-between items-center">
-                                    <p className='text-sm text-gray-500'>4 Space Available</p>  <Button buttonType={"primary"}>Book</Button>
+                                    <p className='text-sm text-gray-500'>{property.spaces.length} Spaces Available</p>  <Button buttonType={"primary"}>Book</Button>
                                 </div>
                             </div>
                         </Link>

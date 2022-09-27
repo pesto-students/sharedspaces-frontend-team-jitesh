@@ -5,16 +5,23 @@ import Button from '../../components/button/Button'
 import { Link, useParams } from 'react-router-dom'
 import { getSpace } from '../../store/actions/siteAction'
 import Loader from '../../components/loader/Loader'
+import BookingForm from '../../popups/bookingForm/BookingForm'
 
 const SpacePage = () => {
     const dispatch = useDispatch()
     const { propertyId, spaceId } = useParams();
     const { space, otherSpaces } = useSelector(state => state.site.space)
     const [loading, setLoading] = useState(false)
+    const [modalIsOpen, setModalIsOpen] = useState(true)
 
     useEffect(() => {
         dispatch(getSpace(spaceId, (value) => setLoading(value)))
     }, [spaceId])
+
+
+    const onClose = () => {
+        setModalIsOpen(false)
+    }
     return (
         <>
             {loading ?
@@ -36,7 +43,7 @@ const SpacePage = () => {
                                 <p className="text-3xl font-bold mt-10">{space?.spaceTitle}</p>
                                 <p className="text-1xl text-gray-500">{space?.noOfDesks} Desks Available</p>
 
-                                <Button buttonType={"primary"} className="mt-10" >Start Booking</Button>
+                                <Button buttonType={"primary"} className="mt-10" onClick={() => setModalIsOpen(true)}>Start Booking</Button>
 
                                 <h2 className="text-lg font-bold mt-10 mb-2">Description</h2>
                                 <p className="text-1xl text-gray-500">{space?.spaceDescription}</p>
@@ -65,6 +72,8 @@ const SpacePage = () => {
                     </div>
                 )
             }
+            {space && <BookingForm modalIsOpen={modalIsOpen} onClose={onClose} space={space} />}
+
         </>
     )
 }
