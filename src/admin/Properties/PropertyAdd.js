@@ -3,14 +3,27 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from '../../components/button/Button'
 import Input from '../../components/input/Input'
+import PropertyMap from '../../components/propertyMap/propertyMap'
 import Textarea from '../../components/textarea/Textarea'
 import { addProperty } from '../../store/actions/adminAction'
+import {
+    GoogleMap,
+    LoadScript,
+    StandaloneSearchBox,
+} from "@react-google-maps/api";
 import './propertyAdd.scss'
 
 const PropertyAdd = () => {
     const dispatch = useDispatch()
     const [values, setValues] = useState({})
+    const [addressValues, setAddressValues] = useState({})
     const [loading, setLoading] = useState(false)
+
+    const [searchBox, setSearchBox] = React.useState(null);
+    const [location, setLocation] = React.useState({
+        lat: 28.6139391,
+        lng: 77.2090212,
+    });
 
     const onInputChange = e => {
         setValues({
@@ -19,18 +32,52 @@ const PropertyAdd = () => {
         });
     };
 
+    const onAddressInputChange = e => {
+        setAddressValues({
+            ...addressValues,
+            [e.target.name]: e.target.value
+        });
+    };
+
     const onSubmit = (e) => {
         e.preventDefault()
 
-        const data = values
+        const data = {
+            ...values, ...addressValues
+        }
         dispatch(addProperty(data, (value) => setLoading(value)))
     }
+
+
+    const onSearchBoxLoad = React.useCallback((ref) => {
+        setSearchBox(ref);
+    }, []);
+
+    const onPlacesChanged = React.useCallback(() => {
+        const data = searchBox.getPlaces();
+        let location = {
+            lat: data[0].geometry.location.lat(),
+            lng: data[0].geometry.location.lng(),
+        };
+
+        setLocation(location);
+
+        setAddressValues({
+            ...addressValues,
+            address: data[0].formatted_address,
+            lat: location.lat,
+            lng: location.lng,
+        });
+    }, [searchBox]);
+
+
     return (
         <div className="admin-body mb-10">
-            <div className="admin-breadcrums mb-5">
-                <Link to="/admin/" className="heading text-sm font-bold"> Add Property</Link>
+
+            <div className="admin-breadcrums mb-3">
+                <Link to="/admin/property" className="heading text-lg font-bold">Properties</Link>
                 <img className='arrow' src="/assets/icons/chevron-right.png" alt="" />
-                <Link to="/admin/" className="heading text-sm font-bold">Add Property</Link>
+                <Link to="/admin/property/add" className="heading text-lg font-bold">Add Property</Link>
             </div>
 
             <div class="body-section bg-white shadow-new p-5 rounded">
@@ -71,18 +118,21 @@ const PropertyAdd = () => {
                                 required
                             />
                         </div>
-                        <div className="property-image-wrapper ml-20">
-                            <Input
-                                label={"Property Image"}
-                                name={"propertyImage"}
-                                type="file"
-                                value={values.propertyImage}
-                                placeholder='Enter Property Image'
-                                onChange={onInputChange}
-                                className="flex flex-col"
-                                required
-                            />
+                        <div className="right-section">
+                            <div className="property-image-wrapper">
+                                <Input
+                                    label={"Property Image"}
+                                    name={"propertyImage"}
+                                    type="file"
+                                    value={values.propertyImage}
+                                    placeholder='Enter Property Image'
+                                    onChange={onInputChange}
+                                    className="flex flex-col"
+                                    required
+                                />
+                            </div>
                         </div>
+
                     </div>
 
 
@@ -91,23 +141,31 @@ const PropertyAdd = () => {
                     </div>
                     <div className="main-wrapper">
                         <div className='left-section'>
-                            <Input
-                                label={"Address"}
-                                name={"address"}
-                                type="text"
-                                value={values.address}
-                                placeholder='Enter Address'
-                                onChange={onInputChange}
-                                className="flex flex-col"
-                                required
-                            />
+
+                            <StandaloneSearchBox
+                                onLoad={onSearchBoxLoad}
+                                onPlacesChanged={onPlacesChanged}
+                            >
+                                <Input
+                                    label={"Address"}
+                                    name={"address"}
+                                    type="text"
+                                    value={addressValues.address}
+                                    placeholder='Enter Address'
+                                    onChange={onAddressInputChange}
+                                    className="flex flex-col"
+                                    required
+                                />
+                            </StandaloneSearchBox>
+
+
                             <Input
                                 label={"Postcode"}
                                 name={"postcode"}
                                 type="text"
-                                value={values.postcode}
+                                value={addressValues.postcode}
                                 placeholder='Enter Postcode'
-                                onChange={onInputChange}
+                                onChange={onAddressInputChange}
                                 className="flex flex-col"
                                 required
                             />
@@ -115,9 +173,9 @@ const PropertyAdd = () => {
                                 label={"Latitude"}
                                 name={"lat"}
                                 type="text"
-                                value={values.lat}
+                                value={addressValues.lat}
                                 placeholder='Enter Latitude'
-                                onChange={onInputChange}
+                                onChange={onAddressInputChange}
                                 className="flex flex-col"
                                 required
                             />
@@ -125,16 +183,19 @@ const PropertyAdd = () => {
                                 label={"Longitude"}
                                 name={"lng"}
                                 type="text"
-                                value={values.lng}
+                                value={addressValues.lng}
                                 placeholder='Enter Longitude'
-                                onChange={onInputChange}
+                                onChange={onAddressInputChange}
                                 className="flex flex-col"
                                 required
                             />
                         </div>
-                        <div className="property-image-wrapper ml-20">
-
+                        <div className="right-section">
+                            <div className="property-map-wrapper">
+                                <PropertyMap location={location} zoom={12} />
+                            </div>
                         </div>
+
                     </div>
 
                     <div className="admin-header">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './propertyPage.scss'
 import Button from '../../components/button/Button'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { getProperty } from '../../store/actions/siteAction'
 import Loader from '../../components/loader/Loader'
 import PropertyMap from '../../components/propertyMap/propertyMap'
@@ -10,13 +10,20 @@ import PropertyMap from '../../components/propertyMap/propertyMap'
 
 const PropertyPage = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { propertyId } = useParams();
     const property = useSelector(state => state.site.property)
 
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        dispatch(getProperty(propertyId, (value) => setLoading(value)))
+        dispatch(
+            getProperty(
+                propertyId,
+                (value) => setLoading(value),
+                () => navigate("/admin/property")
+            )
+        )
     }, [])
     return (
         <>
@@ -38,7 +45,7 @@ const PropertyPage = () => {
                             <div className="property-map">
                                 <PropertyMap
                                     location={{ lat: parseFloat(property?.lat), lng: parseFloat(property?.lng) }}
-                                    zoom={5}
+                                    zoom={12}
                                 />
                             </div>
                         </div>

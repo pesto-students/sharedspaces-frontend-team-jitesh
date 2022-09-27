@@ -1,6 +1,6 @@
 import Axios from "../../Axios";
 import {
-    SET_ADMIN_LOADING
+    SET_ADMIN_LOADING, SET_ALL_PROPERTY
 } from "../types/adminTypes";
 import { toast } from 'react-toastify';
 
@@ -19,16 +19,39 @@ export const setAdminLoading = (data) => (dispatch) => {
 };
 
 
-
-export const addProperty = (data, loading) => (dispatch) => {
+export const getAllProperty = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        Axios.post(`/property/add`, data).then(res => {
+        const response = await Axios.post('/property/getAll', data)
+
+        if (response) {
+            dispatch({
+                type: SET_ALL_PROPERTY,
+                payload: response.data.data
+            })
             loading(false)
-        }).catch(err => {
+        } else {
             loading(false)
-            console.log(err)
-        })
+        }
+    } catch (error) {
+        console.log("error", error.response);
+        // toast.error(res.data.message);
+    }
+};
+
+
+export const addProperty = (data, loading) => async (dispatch) => {
+    loading(true)
+    try {
+        const res = await Axios.post(`/property/add`, data)
+        if (res.data.success) {
+            toast.success(res.data.message);
+            loading(false)
+        } else {
+            toast.error(res.data.message);
+            loading(false)
+        }
+
     } catch (error) {
         console.log("error", error.response);
         loading(false)

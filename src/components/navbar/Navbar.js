@@ -24,7 +24,30 @@ export default function Navbar(props) {
         document.querySelector('body').style.margin = 0
         return null;
     } else if (location?.pathname?.match(/admin/)) {
-        return <AdminNavbar />
+        return <nav className="admin-navbar text-gray-800 fixed top-0 left-0 right-0 w-full flex flex-wrap items-center justify-between font-bold shadow-new navbar navbar-expand-lg navbar-light">
+            <div className="left-section flex items-center">
+                <Link to="/">
+                    <img className='logo' src="/assets/images/logo-black.png" alt="" />
+                </Link>
+            </div>
+
+
+            {isUserLoggedIn
+                ? <div className="right-section flex items-center">
+                    <Link to="/">
+                        <Button buttonType="primary-outline" className={"mr-5"}>Go to Site</Button>
+                    </Link>
+                    <ProfileDropdown userDetail={userDetail} />
+                </div>
+                : <div className="right-section flex items-center">
+                    <Link to="/login">
+                        <Button buttonType="primary" className="mx-2">Login</Button>
+                    </Link>
+                    <Link to="/sign-up">
+                        <Button buttonType="primary-outline" className="ml-2">Sign Up</Button>
+                    </Link>
+                </div>}
+        </nav>
     }
 
     document.querySelector('body').style.marginTop = "80px"

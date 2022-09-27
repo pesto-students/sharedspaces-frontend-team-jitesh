@@ -3,14 +3,15 @@
 }
 .dropdown-wrapper {
     position: relative;
+    min-height: 40px;
     .user-image {
-        width: 28px;
+        width: 25px;
         border-radius: 50px;
         margin-right: 10px;
         margin-left: 2px;
     }
     .logout {
-        width: 28px;
+        width: 25px;
         margin-left: 15px;
     }
 }

@@ -1,5 +1,5 @@
 import {
-    SET_ADMIN_LOADING
+    SET_ADMIN_LOADING, SET_ALL_PROPERTY
 } from "../types/adminTypes";
 
 const initalState = {
@@ -13,7 +13,11 @@ const adminReducer = (state = initalState, action) => {
                 ...state,
                 isAdminLoading: action.payload,
             };
-
+        case SET_ALL_PROPERTY:
+            return {
+                ...state,
+                allProperties: action.payload,
+            };
         default:
             return state;
     }

@@ -15,7 +15,7 @@ const AdminSidebar = () => {
                 <Link to="/admin/bookings" className="nav-item hover:bg-gray-700 font-medium shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer">
                     <img src="/assets/icons/bookings.png" alt="" /> Bookings
                 </Link>
-                <Link to="/admin/dashboard" className="nav-item hover:bg-gray-700 font-medium shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer">
+                <Link to="/admin/property" className="nav-item hover:bg-gray-700 font-medium shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer">
                     <img src="/assets/icons/properties.png" alt="" />   Properties
                 </Link>
                 <Link to="/admin/dashboard" className="nav-item hover:bg-gray-700 font-medium shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer">
