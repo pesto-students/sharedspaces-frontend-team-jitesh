@@ -7,7 +7,7 @@ import {
 
 
 //COMPONENT
-const Map = ({ location }) => {
+const PropertyMap = ({ location, zoom }) => {
     const [map, setMap] = React.useState(null);
 
     const onLoad = React.useCallback(function callback(map) {
@@ -24,19 +24,21 @@ const Map = ({ location }) => {
         <GoogleMap
             mapContainerStyle={{
                 width: "100%",
-                height: "88vh",
+                height: "100%",
             }}
             center={location}
-            zoom={8}
+            zoom={zoom}
             onLoad={onLoad}
             onUnmount={onUnmount}
             options={{
                 disableDefaultUI: true,
             }}
         >
-            <MarkerF position={location} />
+            <MarkerF
+                position={location}
+            />
         </GoogleMap >
     );
 };
 
-export default Map;
+export default PropertyMap;

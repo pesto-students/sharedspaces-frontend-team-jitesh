@@ -6,10 +6,16 @@ import Button from '../../components/button/Button'
 import { Link, useParams } from 'react-router-dom'
 import { getAllProperty } from '../../store/actions/siteAction'
 import Loader from '../../components/loader/Loader'
-import Map from '../../components/map/Map'
+import SearchMap from '../../components/searchMap/SearchMap'
 
 
-
+const defaultLocation = {
+    center: {
+        lat: 24.9922817,
+        lng: 78.3902509,
+    },
+    zoom: 5
+}
 
 const SearchPage = () => {
     const dispatch = useDispatch()
@@ -52,10 +58,11 @@ const SearchPage = () => {
                 </div>
             </div >
             <div className="right-section">
-                <Map location={{
-                    lat: 51.5074,
-                    lng: -0.1278,
-                }} />
+                <SearchMap
+                    location={defaultLocation.center}
+                    zoom={defaultLocation.zoom}
+                    allProperties={allProperties}
+                />
             </div>
         </div >
     )

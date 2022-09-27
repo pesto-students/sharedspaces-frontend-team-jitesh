@@ -5,6 +5,7 @@ import Button from '../../components/button/Button'
 import { Link, useParams } from 'react-router-dom'
 import { getProperty } from '../../store/actions/siteAction'
 import Loader from '../../components/loader/Loader'
+import PropertyMap from '../../components/propertyMap/propertyMap'
 
 
 const PropertyPage = () => {
@@ -35,7 +36,10 @@ const PropertyPage = () => {
                                 <img src="/assets/images/property-image.png" alt="" />
                             </div>
                             <div className="property-map">
-                                <img src="/assets/images/map-image.png" alt="" />
+                                <PropertyMap
+                                    location={{ lat: parseFloat(property?.lat), lng: parseFloat(property?.lng) }}
+                                    zoom={5}
+                                />
                             </div>
                         </div>
                         <div className="property-description">
