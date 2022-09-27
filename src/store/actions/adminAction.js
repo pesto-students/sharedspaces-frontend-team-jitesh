@@ -40,13 +40,14 @@ export const getAllProperty = (data, loading) => async (dispatch) => {
 };
 
 
-export const addProperty = (data, loading) => async (dispatch) => {
+export const addProperty = (data, loading, navigate) => async (dispatch) => {
     loading(true)
     try {
         const res = await Axios.post(`/property/add`, data)
         if (res.data.success) {
             toast.success(res.data.message);
             loading(false)
+            navigate()
         } else {
             toast.error(res.data.message);
             loading(false)
@@ -58,5 +59,27 @@ export const addProperty = (data, loading) => async (dispatch) => {
         // toast.error(res.data.message);
     }
 };
+
+
+export const addSpace = (data, loading, navigate) => async (dispatch) => {
+    loading(true)
+    try {
+        const res = await Axios.post(`/space/add`, data)
+        if (res.data.success) {
+            toast.success(res.data.message);
+            loading(false)
+            navigate()
+        } else {
+            toast.error(res.data.message);
+            loading(false)
+        }
+
+    } catch (error) {
+        console.log("error", error.response);
+        loading(false)
+        // toast.error(res.data.message);
+    }
+};
+
 
 

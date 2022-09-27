@@ -25,6 +25,7 @@ import Bookings from "./admin/Bookings/Bookings";
 import Users from "./admin/Users/Users";
 import PropertyAdd from "./admin/Properties/PropertyAdd";
 import PropertyList from "./admin/Properties/PropertyList";
+import SpaceAdd from "./admin/Properties/SpaceAdd";
 
 function App() {
   const location = useLocation()
@@ -63,6 +64,7 @@ function App() {
           <Route path="/admin/bookings" element={<Bookings />} />
           <Route path="/admin/property" element={<PropertyList />} />
           <Route path="/admin/property/add" element={<PropertyAdd />} />
+          <Route path="/admin/space/add/:propertyId" element={<SpaceAdd />} />
         </Route>
       </Routes>
 

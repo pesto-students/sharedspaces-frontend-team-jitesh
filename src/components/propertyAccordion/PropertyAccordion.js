@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './propertyAccordion.scss'
 
 const PropertyAccordien = ({ property, spaces }) => {
@@ -16,7 +17,7 @@ const PropertyAccordien = ({ property, spaces }) => {
                     </div>
                 </div>
                 <div className='flex justify-between self-center'>
-                    <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs'>Add New Space</button>
+                    <Link to={`/admin/space/add/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs'>Add New Space</Link>
                     <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs'>Edit Property</button>
                     <button className='bg-red-300 rounded px-2 py-1 ml-3 text-xs'>Delete Property</button>
                 </div>

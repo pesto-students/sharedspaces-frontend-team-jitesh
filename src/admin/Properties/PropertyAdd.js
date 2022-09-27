@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/button/Button'
 import Input from '../../components/input/Input'
 import PropertyMap from '../../components/propertyMap/propertyMap'
@@ -15,6 +15,7 @@ import './propertyAdd.scss'
 
 const PropertyAdd = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [values, setValues] = useState({})
     const [addressValues, setAddressValues] = useState({})
     const [loading, setLoading] = useState(false)
@@ -45,7 +46,13 @@ const PropertyAdd = () => {
         const data = {
             ...values, ...addressValues
         }
-        dispatch(addProperty(data, (value) => setLoading(value)))
+        dispatch(
+            addProperty(
+                data,
+                (value) => setLoading(value),
+                () => navigate("/admin/property")
+            )
+        )
     }
 
 
@@ -77,7 +84,7 @@ const PropertyAdd = () => {
             <div className="admin-breadcrums mb-3">
                 <Link to="/admin/property" className="heading text-lg font-bold">Properties</Link>
                 <img className='arrow' src="/assets/icons/chevron-right.png" alt="" />
-                <Link to="/admin/property/add" className="heading text-lg font-bold">Add Property</Link>
+                <div className="heading text-lg font-bold">Add Property</div>
             </div>
 
             <div class="body-section bg-white shadow-new p-5 rounded">
