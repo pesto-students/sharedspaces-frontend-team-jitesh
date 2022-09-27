@@ -6,6 +6,10 @@ import Button from '../../components/button/Button'
 import { Link, useParams } from 'react-router-dom'
 import { getAllProperty } from '../../store/actions/siteAction'
 import Loader from '../../components/loader/Loader'
+import Map from '../../components/map/Map'
+
+
+
 
 const SearchPage = () => {
     const dispatch = useDispatch()
@@ -22,6 +26,7 @@ const SearchPage = () => {
     }, [params])
 
     return (
+
         <div className='search-wrapper flex'>
             <div className="left-section hide-scrollbar">
                 <SearchInput value={params.searchKeyword} />
@@ -47,7 +52,10 @@ const SearchPage = () => {
                 </div>
             </div >
             <div className="right-section">
-                <img src="/assets/images/map.png" alt="" />
+                <Map location={{
+                    lat: 51.5074,
+                    lng: -0.1278,
+                }} />
             </div>
         </div >
     )

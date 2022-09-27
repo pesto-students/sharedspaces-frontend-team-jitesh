@@ -1,0 +1,1 @@
+export const SET_ADMIN_LOADING = "SET_ADMIN_LOADING";

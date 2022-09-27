@@ -5,6 +5,7 @@ import {
 } from "../types/siteTypes";
 
 const initalState = {
+  property: {},
   space: {}
 };
 
