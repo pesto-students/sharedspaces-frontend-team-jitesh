@@ -12,7 +12,7 @@ const SpacePage = () => {
     const { propertyId, spaceId } = useParams();
     const { space, otherSpaces } = useSelector(state => state.site.space)
     const [loading, setLoading] = useState(false)
-    const [modalIsOpen, setModalIsOpen] = useState(true)
+    const [modalIsOpen, setModalIsOpen] = useState(false)
 
     useEffect(() => {
         dispatch(getSpace(spaceId, (value) => setLoading(value)))

@@ -83,7 +83,7 @@ const PropertyAdd = () => {
 
             <div className="admin-breadcrums mb-3">
                 <Link to="/admin/property" className="heading text-lg font-bold">Properties</Link>
-                <img className='arrow' src="/assets/icons/chevron-right.png" alt="" />
+                <img className='arrow mx-3' src="/assets/icons/chevron-right.png" alt="" />
                 <div className="heading text-lg font-bold">Add Property</div>
             </div>
 

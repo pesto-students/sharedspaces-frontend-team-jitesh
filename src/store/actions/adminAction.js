@@ -1,6 +1,6 @@
 import Axios from "../../Axios";
 import {
-    SET_ADMIN_LOADING, SET_ALL_PROPERTY
+    SET_ADMIN_LOADING, SET_ALL_BOOKING, SET_ALL_PROPERTY
 } from "../types/adminTypes";
 import { toast } from 'react-toastify';
 
@@ -82,4 +82,22 @@ export const addSpace = (data, loading, navigate) => async (dispatch) => {
 };
 
 
+export const getAllBooking = (data, loading) => async (dispatch) => {
+    loading(true)
+    try {
+        const response = await Axios.post('/booking/getAll', data)
 
+        if (response) {
+            dispatch({
+                type: SET_ALL_BOOKING,
+                payload: response.data.data
+            })
+            loading(false)
+        } else {
+            loading(false)
+        }
+    } catch (error) {
+        console.log("error", error.response);
+        // toast.error(res.data.message);
+    }
+};

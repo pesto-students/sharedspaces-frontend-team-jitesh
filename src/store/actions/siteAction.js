@@ -161,3 +161,24 @@ export const getSpace = (spaceId, loading) => async (dispatch) => {
     // toast.error(res.data.message);
   }
 };
+
+
+export const addBooking = (data, loading, completed) => async (dispatch) => {
+  loading(true)
+  try {
+    const res = await Axios.post(`/booking/add`, data)
+    if (res.data.success) {
+      toast.success(res.data.message);
+      loading(false)
+      completed(true)
+    } else {
+      toast.error(res.data.message);
+      loading(false)
+    }
+
+  } catch (error) {
+    console.log("error", error.response);
+    loading(false)
+    // toast.error(res.data.message);
+  }
+};
