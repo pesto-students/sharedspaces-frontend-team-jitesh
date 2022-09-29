@@ -66,7 +66,7 @@ const HomePage = () => {
                 {allProperties?.slice(0, 3)?.map(property =>
                   <Link to={`/property/${property._id}`} className="property-item bg-white shadow-new fade-in-bottom">
                     <div className="property-image">
-                      <img src="/assets/images/property-one.png" alt="" />
+                      <img src={property.propertyImage} alt={property.propertyTitle} />
                     </div>
                     <div className="property-description">
                       <p className="text-lg font-bold">{property.propertyTitle}</p>

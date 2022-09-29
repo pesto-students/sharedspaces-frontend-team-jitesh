@@ -12,6 +12,7 @@ import {
     StandaloneSearchBox,
 } from "@react-google-maps/api";
 import './propertyAdd.scss'
+import ImageUpload from '../../components/imageUpload/ImageUpload'
 
 const PropertyAdd = () => {
     const dispatch = useDispatch()
@@ -77,6 +78,12 @@ const PropertyAdd = () => {
         });
     }, [searchBox]);
 
+    const uploadPath = (imagePath) => {
+        setValues({
+            ...values,
+            propertyImage: imagePath
+        })
+    }
 
     return (
         <div className="admin-body mb-10">
@@ -127,15 +134,10 @@ const PropertyAdd = () => {
                         </div>
                         <div className="right-section">
                             <div className="property-image-wrapper">
-                                <Input
-                                    label={"Property Image"}
-                                    name={"propertyImage"}
-                                    type="file"
-                                    value={values.propertyImage}
-                                    placeholder='Enter Property Image'
-                                    onChange={onInputChange}
-                                    className="flex flex-col"
-                                    required
+                                <ImageUpload
+                                    uploadPath={uploadPath}
+                                    uploadType="property"
+                                // id=""
                                 />
                             </div>
                         </div>

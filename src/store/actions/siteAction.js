@@ -121,7 +121,7 @@ export const getProperty = (propertyId, loading) => async (dispatch) => {
 };
 
 
-export const getAllSoace = (data, loading) => async (dispatch) => {
+export const getAllSpace = (data, loading) => async (dispatch) => {
   loading(true)
   try {
     const response = await Axios.post('/space/getAll', data)

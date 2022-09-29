@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllBooking } from '../../store/actions/adminAction'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Loader from '../../components/loader/Loader'
-import Button from '../../components/button/Button'
+import moment from 'moment'
 
-const Bookings = (props) => {
+const Bookings = () => {
     const dispatch = useDispatch()
-    const params = useParams()
     const allBookings = useSelector(state => state.admin.allBookings)
 
     const [loading, setLoading] = useState(false)
@@ -37,8 +36,7 @@ const Bookings = (props) => {
                                     <th class="py-3 px-6 text-left">User</th>
                                     <th class="py-3 px-6 text-left">Property</th>
                                     <th class="py-3 px-6 text-left">Space</th>
-                                    <th class="py-3 px-6 text-left">Start Date</th>
-                                    <th class="py-3 px-6 text-left">End Date</th>
+                                    <th class="py-3 px-6 text-left">Booked Date</th>
                                     <th class="py-3 px-6 text-center">Status</th>
                                     <th class="py-3 px-6 text-center">Actions</th>
                                 </tr>
@@ -64,19 +62,14 @@ const Bookings = (props) => {
                                         </td>
                                         <td class="py-3 px-6 text-left">
                                             <div class="flex items-center">
-                                                <span>{b.startDate}</span>
-                                            </div>
-                                        </td>
-                                        <td class="py-3 px-6 text-left">
-                                            <div class="flex items-center">
-                                                <span>{b.endDate}</span>
+                                                <span><span>{moment(b.createdAt).format("DD-MM-YYYY")}</span></span>
                                             </div>
                                         </td>
 
                                         <td class="py-3 px-6 text-center">
-                                            {b.status === "Booked" && <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>}
+                                            {b.status === "Booked" ? <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Booked</span> : <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Booked</span>}
                                             {/* {b.status === "pending" && <span class="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>} */}
-                                            {b.status === "Canceled" && <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
+                                            {b.status === "Canceled" && <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Cancelled</span>}
                                         </td>
                                         <td class="py-3 px-6 text-center">
                                             <div class="flex item-center justify-center">

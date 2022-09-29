@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import Button from '../../components/button/Button'
+import ImageUpload from '../../components/imageUpload/ImageUpload'
 import Input from '../../components/input/Input'
 import Textarea from '../../components/textarea/Textarea'
 import { addSpace } from '../../store/actions/adminAction'
@@ -73,6 +74,13 @@ const SpaceAdd = () => {
         });
     }, [searchBox]);
 
+    const uploadPath = (imagePath) => {
+        setValues({
+            ...values,
+            spaceImage: imagePath
+        })
+    }
+
 
     return (
         <div className="admin-body mb-10">
@@ -123,15 +131,10 @@ const SpaceAdd = () => {
                         </div>
                         <div className="right-section">
                             <div className="property-image-wrapper">
-                                <Input
-                                    label={"Space Image"}
-                                    name={"spaceImage"}
-                                    type="file"
-                                    value={values.spaceImage}
-                                    placeholder='Enter Space Image'
-                                    onChange={onInputChange}
-                                    className="flex flex-col"
-                                    required
+                                <ImageUpload
+                                    uploadPath={uploadPath}
+                                    uploadType="space"
+                                // id=""
                                 />
                             </div>
                         </div>

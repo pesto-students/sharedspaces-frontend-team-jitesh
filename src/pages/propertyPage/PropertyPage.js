@@ -40,7 +40,7 @@ const PropertyPage = () => {
                         </Link>
                         <div className="property-image-map-section">
                             <div className="property-image">
-                                <img src="/assets/images/property-image.png" alt="" />
+                                <img src={property?.propertyImage} alt={property?.propertyTitle} />
                             </div>
                             <div className="property-map">
                                 <PropertyMap
@@ -75,7 +75,7 @@ const PropertyPage = () => {
 
                                 {property?.spaces?.length > 0 ? property?.spaces?.map(space =>
                                     <Link to={`/space/${propertyId}/${space._id}`} className="space-item">
-                                        <img src="/assets/images/space-one.png" alt="" />
+                                        <img src={space.spaceImage} alt={space.spaceTitle} />
                                         <div className="space-details">
                                             <p className="text-1xl font-bold">{space.spaceTitle}</p>
                                             <p className="text-sm text-gray-500">{space.noOfDesks} Desks Available</p>

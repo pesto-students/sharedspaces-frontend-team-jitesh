@@ -1,79 +1,81 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllUser } from '../../store/actions/adminAction'
+import { Link } from 'react-router-dom'
+import Loader from '../../components/loader/Loader'
+import moment from 'moment'
 
-const Users = (props) => {
-    const bookings = [
-        {
-            user: 'Pradeep Malviya',
-            email_id: "pradeep@gmail.com",
-            mob_no: "7456886108",
-            reg_date: "12-08-2022 10:50",
-            status: "active"
-        },
-        {
-            user: 'Shubham Sharma',
-            email_id: "shubham@gmail.com",
-            mob_no: "7456886109",
-            reg_date: "20-08-2022 11:50",
-            status: "deactive"
-        },
-        {
-            user: 'Rahul Kumar',
-            email_id: "rahul@gmail.com",
-            mob_no: "7456886110",
-            reg_date: "11-08-2022 13:50",
-            status: "deactive"
-        }
-    ]
+const Users = () => {
+    const dispatch = useDispatch()
+    const allUsers = useSelector(state => state.admin.allUsers)
+
+    const [loading, setLoading] = useState(false)
+
+    useEffect(() => {
+        let data = {}
+        dispatch(getAllUser(data, (value) => setLoading(value)))
+    }, [])
+
     return (
         <div className="admin-body">
             <div className="admin-header">
                 <h1 className="heading text-lg font-bold mb-3">Users</h1>
             </div>
 
+            {
+                loading ?
+                    <div className="flex w-100 justify-center py-40">
+                        <Loader width={"w-10"} className={"text-gray-200"} />
+                    </div>
+                    :
+                    <div class="bg-white shadow-md rounded fade-in-bottom">
+                        <table class="min-w-max w-full table-auto">
+                            <thead>
+                                <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                    <th class="py-3 px-6 text-left">User</th>
+                                    <th class="py-3 px-6 text-left">Email ID</th>
+                                    <th class="py-3 px-6 text-left">Phone Number</th>
+                                    <th class="py-3 px-6 text-left">Register Date</th>
+                                    <th class="py-3 px-6 text-left">Role</th>
+                                    <th class="py-3 px-6 text-center">Status</th>
+                                    {/* <th class="py-3 px-6 text-center">Actions</th> */}
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 text-sm font-light">
+                                {allUsers?.map(user =>
+                                    <tr class="border-b border-gray-200 hover:bg-gray-100">
 
-            <div class="bg-white shadow-md rounded">
-                <table class="min-w-max w-full table-auto">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">User</th>
-                            <th class="py-3 px-6 text-left">Email ID</th>
-                            <th class="py-3 px-6 text-left">Phone Number</th>
-                            <th class="py-3 px-6 text-left">Register Date</th>
-                            <th class="py-3 px-6 text-center">Status</th>
-                            {/* <th class="py-3 px-6 text-center">Actions</th> */}
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light">
-                        {bookings.map(b =>
-                            <tr class="border-b border-gray-200 hover:bg-gray-100">
-
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-                                        <span>{b.user}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-                                        <span>{b.email_id}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-                                        <span> {b.mob_no}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center">
-                                        <span>{b.reg_date}</span>
-                                    </div>
-                                </td>
-
-                                <td class="py-3 px-6 text-center">
-                                    {b.status === "active" && <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>}
-                                    {/* {b.status === "pending" && <span class="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>} */}
-                                    {b.status === "deactive" && <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
-                                </td>
-                                {/* <td class="py-3 px-6 text-center">
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="flex items-center">
+                                                <span>{user.name}</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="flex items-center">
+                                                <span>{user.email}</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="flex items-center">
+                                                <span> {user.phoneNumber}</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-6 text-left">
+                                            <div class="flex items-center">
+                                                <span>{moment(user.createdAt).format("DD-MM-YYYY")}</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            {user.status === "user" ? <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">Active</span> : <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">User</span>}
+                                            {/* {b.status === "pending" && <span class="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>} */}
+                                            {user.status === "deactive" && <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
+                                        </td>
+                                        <td class="py-3 px-6 text-center">
+                                            {user.status === "active" ? <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span> : <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>}
+                                            {/* {b.status === "pending" && <span class="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>} */}
+                                            {user.status === "deactive" && <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
+                                        </td>
+                                        {/* <td class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-center">
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -93,14 +95,14 @@ const Users = (props) => {
                                         </div>
                                     </div>
                                 </td> */}
-                            </tr>
-                        )}
+                                    </tr>
+                                )}
 
 
 
-                    </tbody>
-                </table>
-            </div>
+                            </tbody>
+                        </table>
+                    </div>}
         </div>
 
 

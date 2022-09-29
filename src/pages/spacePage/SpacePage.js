@@ -56,7 +56,7 @@ const SpacePage = () => {
                                 <div className="space-list">
                                     {otherSpaces?.length > 0 ? otherSpaces?.map(space =>
                                         <Link to={`/space/${propertyId}/${space._id}`} className="space-item">
-                                            <img src="/assets/images/space-one.png" alt="" />
+                                            <img src={space.spaceImage} alt={space.spaceTitle} />
                                             <div className="space-details">
                                                 <p className="text-1xl font-bold">{space.spaceTitle}</p>
                                                 <p className="text-sm text-gray-500">{space.noOfDesks} Desks Available</p>
@@ -65,8 +65,8 @@ const SpacePage = () => {
                                     ) : <div className="flex items-center py-5">No other space available</div>}
                                 </div>
                             </div>
-                            <div className="space-map">
-                                <img src="/assets/images/property-image.png" alt="" />
+                            <div className="space-image">
+                                <img src={space?.spaceImage} alt={space?.spaceTitle} />
                             </div>
                         </div>
                     </div>
