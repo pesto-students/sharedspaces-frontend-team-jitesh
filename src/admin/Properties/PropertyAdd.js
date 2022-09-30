@@ -111,7 +111,7 @@ const PropertyAdd = () => {
                                 className="flex flex-col"
                                 required
                             />
-                            <Input
+                            <Textarea
                                 label={"Property Description"}
                                 name={"propertyDescription"}
                                 type="text"

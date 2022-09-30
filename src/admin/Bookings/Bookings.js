@@ -41,7 +41,7 @@ const Bookings = () => {
                                     <th class="py-3 px-6 text-center">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-gray-600 text-sm font-light">
+                            <tbody class="text-gray-600 text-sm">
                                 {allBookings?.map(b =>
                                     <tr class="border-b border-gray-200 hover:bg-gray-100">
 

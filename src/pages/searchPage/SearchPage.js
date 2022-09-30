@@ -50,7 +50,7 @@ const SearchPage = () => {
                                 </div>
                                 <div className="property-description">
                                     <p className="text-lg font-bold">{property.propertyTitle}</p>
-                                    <p className="text-md text-gray-500">{property.address}</p>
+                                    <p className="text-sm text-gray-500">{property.address}</p>
 
                                     <hr className="my-3" />
                                     <div className="flex justify-between items-center">

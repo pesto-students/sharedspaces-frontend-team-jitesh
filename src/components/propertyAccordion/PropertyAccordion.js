@@ -13,7 +13,7 @@ const PropertyAccordien = ({ property, spaces }) => {
                     </div>
                     <div className='text-left'>
                         <h6 className='font-bold text-base'>{property?.propertyTitle}</h6>
-                        <h6 className='text-sm font-light text-slate-400 mb-3'>{property?.address}</h6>
+                        <h6 className='text-sm text-slate-400 mb-3'>{property?.address}</h6>
                         <Link to={`/property/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 text-xs hover:bg-gray-900 hover:text-white'>View in Site</Link>
                     </div>
                 </div>
@@ -36,7 +36,7 @@ const PropertyAccordien = ({ property, spaces }) => {
                                         </div>
                                         <div className='self-center'>
                                             <h6 className='font-bold text-base'>{item.spaceTitle}</h6>
-                                            <h6 className='text-sm font-light text-slate-400'>{item.noOfDesks} Desks Available</h6>
+                                            <h6 className='text-sm text-slate-400'>{item.noOfDesks} Desks Available</h6>
                                         </div>
                                     </div>
                                     <div className='flex justify-between self-center'>

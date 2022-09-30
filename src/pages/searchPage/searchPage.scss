@@ -12,6 +12,7 @@
             .property-item {
                 margin: 1px 1px 20px 1px;
                 border-radius: 5px;
+                height: 160px;
                 .property-image {
                     width: 250px;
                     height: auto;
@@ -24,8 +25,11 @@
                     border-bottom-left-radius: 5px;
                 }
                 .property-description {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
                     width: 100%;
-                    padding: 20px;
+                    padding: 15px 20px;
                 }
             }
         }

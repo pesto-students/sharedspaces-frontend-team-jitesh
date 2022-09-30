@@ -4,11 +4,13 @@ import {
 } from "../types/adminTypes";
 import { toast } from 'react-toastify';
 
-// const config = {
-//   headers: {
-//     : "zFLUigHPoTwMvKjLSm7YFaKpJX8M",
-//   },
-// };
+
+const userDetail = JSON.parse(localStorage.getItem("ss_user"))
+const config = {
+    headers: {
+        Authorization: `Bearer ${userDetail?.token}`,
+    },
+};
 
 // SET ADMIN LOGIN LOADING
 export const setAdminLoading = (data) => (dispatch) => {
@@ -43,7 +45,7 @@ export const getAllProperty = (data, loading) => async (dispatch) => {
 export const addProperty = (data, loading, navigate) => async (dispatch) => {
     loading(true)
     try {
-        const res = await Axios.post(`/property/add`, data)
+        const res = await Axios.post(`/property/add`, data, config)
         if (res.data.success) {
             toast.success(res.data.message);
             loading(false)
@@ -64,7 +66,7 @@ export const addProperty = (data, loading, navigate) => async (dispatch) => {
 export const addSpace = (data, loading, navigate) => async (dispatch) => {
     loading(true)
     try {
-        const res = await Axios.post(`/space/add`, data)
+        const res = await Axios.post(`/space/add`, data, config)
         if (res.data.success) {
             toast.success(res.data.message);
             loading(false)
@@ -84,7 +86,7 @@ export const addSpace = (data, loading, navigate) => async (dispatch) => {
 export const getAllUser = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        const response = await Axios.post('/user/getAll', data)
+        const response = await Axios.post('/user/getAll', data, config)
 
         if (response) {
             dispatch({
@@ -105,7 +107,7 @@ export const getAllUser = (data, loading) => async (dispatch) => {
 export const getAllBooking = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        const response = await Axios.post('/booking/getAll', data)
+        const response = await Axios.post('/booking/getAll', data, config)
 
         if (response) {
             dispatch({

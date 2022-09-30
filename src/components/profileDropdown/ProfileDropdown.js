@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Dropdown from 'rc-dropdown';
 import Menu, { Item as MenuItem, Divider } from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
@@ -7,21 +8,26 @@ import { Link } from 'react-router-dom';
 
 
 const dropdownList = [
-    { name: "My Profile", link: "/profile" },
-    { name: "My Admin", link: "/admin/dashboard" },
-    { name: "My Bookings", link: "/bookings" },
-    { name: "Logout", link: "/Logout", function: () => logout() },
+    { name: "My Profile", link: "/profile", role: ["User", "Landlord"] },
+    { name: "My Admin", link: "/admin/dashboard", role: ["Admin", "Landlord"] },
+    { name: "My Bookings", link: "/bookings", role: ["User", "Landlord"] },
+    { name: "Logout", link: "/Logout", function: () => logout(), role: ["User", "Landlord", "Admin"] },
 ]
 
 const logout = () => {
     localStorage.clear()
-    window.location.reload()
+    window.location.href = "/"
 }
 
-const ProfileDropdown = ({ userDetail }) => {
-    function onSelect({ key }) {
-        console.log(`${key} selected`);
-    }
+const ProfileDropdown = () => {
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+    const userDetail = useSelector(state => state.site.userDetail)
+
+    useEffect(() => {
+        if (userDetail) {
+            setIsUserLoggedIn(true)
+        }
+    }, [userDetail, userDetail?.token, userDetail?.role])
 
     function onVisibleChange(visible) {
         console.log(visible);
@@ -30,6 +36,7 @@ const ProfileDropdown = ({ userDetail }) => {
     const menu = (
         <div class="dropdown-body rounded shadow bg-white overflow-hidden peer-checked:flex flex-col mt-1 border border-gray-200">
             {dropdownList.map(d =>
+                d?.role?.some(r => r === userDetail?.role) &&
                 <div class="cursor-pointer group">
                     <Link to={d.link} onClick={d.function}
                         class="block transition duration-150 ease-in-out text-sm py-2 pl-3 pr-5 border-transparent border-l-4 group-hover:border-red-500 group-hover:bg-gray-100"

@@ -21,7 +21,7 @@ root.render(
   <React.StrictMode>
     <LoadScript
       // googleMapsApiKey="AIzaSyBshfbfZBr5W4Sg1lTlLbqF3xkr3c6Cd_o"
-      // googleMapsApiKey="AIzaSyCRthu-MIy5qCgyO9qsWgfDwcITmkGWfCk"
+      googleMapsApiKey="AIzaSyCOw_zjoJivNpRyMYlrcyDVTvyyEXgyZFE"
       libraries={libraries}
       language="en"
       region="us"

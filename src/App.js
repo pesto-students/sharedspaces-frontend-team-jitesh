@@ -17,6 +17,7 @@ import PropertyPage from "./pages/propertyPage/PropertyPage";
 import SearchPage from "./pages/searchPage/SearchPage";
 import SignUpPage from "./pages/signUpPage/SignUpPage";
 import SpacePage from "./pages/spacePage/SpacePage";
+import ListYourSpacePage from "./pages/listYourSpacePage/ListYourSpacePage";
 
 // Admin Routes
 import Admin from "./admin/Admin/Admin";
@@ -56,6 +57,8 @@ function App() {
         </Route>
         <Route path="/property/:propertyId" element={<PropertyPage />} />
         <Route path="/space/:propertyId/:spaceId" element={<SpacePage />} />
+        <Route path="/list-your-space" element={<ListYourSpacePage />} />
+
 
         {/* // Admin Routes */}
         <Route element={<Admin />} >

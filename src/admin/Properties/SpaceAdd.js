@@ -13,25 +13,11 @@ const SpaceAdd = () => {
     const navigate = useNavigate()
     const { propertyId } = useParams()
     const [values, setValues] = useState({})
-    const [addressValues, setAddressValues] = useState({})
     const [loading, setLoading] = useState(false)
-
-    const [searchBox, setSearchBox] = React.useState(null);
-    const [location, setLocation] = React.useState({
-        lat: 28.6139391,
-        lng: 77.2090212,
-    });
 
     const onInputChange = e => {
         setValues({
             ...values,
-            [e.target.name]: e.target.value
-        });
-    };
-
-    const onAddressInputChange = e => {
-        setAddressValues({
-            ...addressValues,
             [e.target.name]: e.target.value
         });
     };
@@ -43,6 +29,7 @@ const SpaceAdd = () => {
             ...values,
             propertyId
         }
+
         dispatch(
             addSpace(
                 data,
@@ -51,28 +38,6 @@ const SpaceAdd = () => {
             )
         )
     }
-
-
-    const onSearchBoxLoad = React.useCallback((ref) => {
-        setSearchBox(ref);
-    }, []);
-
-    const onPlacesChanged = React.useCallback(() => {
-        const data = searchBox.getPlaces();
-        let location = {
-            lat: data[0].geometry.location.lat(),
-            lng: data[0].geometry.location.lng(),
-        };
-
-        setLocation(location);
-
-        setAddressValues({
-            ...addressValues,
-            address: data[0].formatted_address,
-            lat: location.lat,
-            lng: location.lng,
-        });
-    }, [searchBox]);
 
     const uploadPath = (imagePath) => {
         setValues({
@@ -108,7 +73,7 @@ const SpaceAdd = () => {
                                 className="flex flex-col"
                                 required
                             />
-                            <Input
+                            <Textarea
                                 label={"Space Description"}
                                 name={"spaceDescription"}
                                 type="text"
@@ -118,10 +83,10 @@ const SpaceAdd = () => {
                                 className="flex flex-col"
                                 required
                             />
-                            <Textarea
+                            <Input
                                 label={"Number of Desks Available"}
                                 name={"noOfDesks"}
-                                type="text"
+                                type="number"
                                 value={values.noOfDesks}
                                 placeholder='Enter Number of Desks Available'
                                 onChange={onInputChange}

@@ -36,12 +36,12 @@ const Users = () => {
                                     <th class="py-3 px-6 text-left">Email ID</th>
                                     <th class="py-3 px-6 text-left">Phone Number</th>
                                     <th class="py-3 px-6 text-left">Register Date</th>
-                                    <th class="py-3 px-6 text-left">Role</th>
+                                    <th class="py-3 px-6 text-center">Role</th>
                                     <th class="py-3 px-6 text-center">Status</th>
                                     {/* <th class="py-3 px-6 text-center">Actions</th> */}
                                 </tr>
                             </thead>
-                            <tbody class="text-gray-600 text-sm font-light">
+                            <tbody class="text-gray-600 text-sm">
                                 {allUsers?.map(user =>
                                     <tr class="border-b border-gray-200 hover:bg-gray-100">
 
@@ -66,14 +66,11 @@ const Users = () => {
                                             </div>
                                         </td>
                                         <td class="py-3 px-6 text-center">
-                                            {user.status === "user" ? <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">Active</span> : <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">User</span>}
-                                            {/* {b.status === "pending" && <span class="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>} */}
-                                            {user.status === "deactive" && <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
+                                            <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">{user.role}</span>
+
                                         </td>
                                         <td class="py-3 px-6 text-center">
-                                            {user.status === "active" ? <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span> : <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span>}
-                                            {/* {b.status === "pending" && <span class="bg-yellow-200 text-yellow-600 py-1 px-3 rounded-full text-xs">Pending</span>} */}
-                                            {user.status === "deactive" && <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
+                                            {user ? <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span> : <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
                                         </td>
                                         {/* <td class="py-3 px-6 text-center">
                                     <div class="flex item-center justify-center">

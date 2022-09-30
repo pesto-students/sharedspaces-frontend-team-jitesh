@@ -6,11 +6,12 @@ import {
 } from "../types/siteTypes";
 import { toast } from 'react-toastify';
 
-// const config = {
-//   headers: {
-//     : "zFLUigHPoTwMvKjLSm7YFaKpJX8M",
-//   },
-// };
+const userDetail = JSON.parse(localStorage.getItem("ss_user"))
+const config = {
+  headers: {
+    Authorization: `Bearer ${userDetail?.token}`,
+  },
+};
 
 // SET LOGIN LOADING
 export const setLoginLoading = (data) => (dispatch) => {
@@ -166,7 +167,7 @@ export const getSpace = (spaceId, loading) => async (dispatch) => {
 export const addBooking = (data, loading, completed) => async (dispatch) => {
   loading(true)
   try {
-    const res = await Axios.post(`/booking/add`, data)
+    const res = await Axios.post(`/booking/add`, data, config)
     if (res.data.success) {
       toast.success(res.data.message);
       loading(false)
@@ -182,3 +183,34 @@ export const addBooking = (data, loading, completed) => async (dispatch) => {
     // toast.error(res.data.message);
   }
 };
+
+
+export const onUpdateUserRole = (userId, loading, navigate) => async (dispatch) => {
+  loading(true)
+  try {
+    const res = await Axios.put(`/user/updateUserRole/${userId}`, {}, config)
+    if (res.data.success) {
+      toast.success(res.data.message);
+
+
+      const userDetail = JSON.parse(localStorage.getItem('ss_user'))
+      userDetail.role = "Landlord"
+
+      // Setting up data in localstorage and redux
+      localStorage.setItem("ss_user", JSON.stringify(userDetail))
+      setUserDetail(userDetail)
+      loading(false)
+      navigate()
+    } else {
+      toast.error(res.data.message);
+      loading(false)
+    }
+
+  } catch (error) {
+    console.log("error", error.response);
+    loading(false)
+    // toast.error(res.data.message);
+  }
+};
+
+

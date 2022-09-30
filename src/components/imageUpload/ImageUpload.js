@@ -26,12 +26,12 @@ const ImageUpload = ({
     }
 
     const onUpload = async (file) => {
-        setLoading(true)
+
         const formData = new FormData()
         formData.append('file', file)
 
-
         try {
+            setLoading(true)
             const { data } = await Axios.post(`/image/${uploadType}/${id ? id : guidGenerator()}`, formData)
             if (data.success) {
                 setFile(data.data)
@@ -43,7 +43,6 @@ const ImageUpload = ({
         } catch (error) {
             setLoading(false)
         }
-
     }
 
     return (
