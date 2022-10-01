@@ -5,12 +5,14 @@ import {
 import { toast } from 'react-toastify';
 
 
-const userDetail = JSON.parse(localStorage.getItem("ss_user"))
-const config = {
-    headers: {
-        Authorization: `Bearer ${userDetail?.token}`,
-    },
-};
+const getConfig = () => {
+    const userDetail = JSON.parse(localStorage.getItem("ss_user"))
+    return {
+        headers: {
+            Authorization: `Bearer ${userDetail?.token}`,
+        },
+    };
+}
 
 // SET ADMIN LOGIN LOADING
 export const setAdminLoading = (data) => (dispatch) => {
@@ -24,7 +26,7 @@ export const setAdminLoading = (data) => (dispatch) => {
 export const getAllProperty = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        const response = await Axios.post('/property/getAll', data)
+        const response = await Axios.post('/property/admin/getAll', data, getConfig())
 
         if (response) {
             dispatch({
@@ -45,7 +47,7 @@ export const getAllProperty = (data, loading) => async (dispatch) => {
 export const addProperty = (data, loading, navigate) => async (dispatch) => {
     loading(true)
     try {
-        const res = await Axios.post(`/property/add`, data, config)
+        const res = await Axios.post(`/property/add`, data, getConfig())
         if (res.data.success) {
             toast.success(res.data.message);
             loading(false)
@@ -66,7 +68,7 @@ export const addProperty = (data, loading, navigate) => async (dispatch) => {
 export const addSpace = (data, loading, navigate) => async (dispatch) => {
     loading(true)
     try {
-        const res = await Axios.post(`/space/add`, data, config)
+        const res = await Axios.post(`/space/add`, data, getConfig())
         if (res.data.success) {
             toast.success(res.data.message);
             loading(false)
@@ -86,7 +88,7 @@ export const addSpace = (data, loading, navigate) => async (dispatch) => {
 export const getAllUser = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        const response = await Axios.post('/user/getAll', data, config)
+        const response = await Axios.post('/user/getAll', data, getConfig())
 
         if (response) {
             dispatch({
@@ -107,7 +109,7 @@ export const getAllUser = (data, loading) => async (dispatch) => {
 export const getAllBooking = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        const response = await Axios.post('/booking/getAll', data, config)
+        const response = await Axios.post('/booking/getAll', data, getConfig())
 
         if (response) {
             dispatch({
@@ -128,7 +130,7 @@ export const getAllBooking = (data, loading) => async (dispatch) => {
 export const getAllAmenity = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        const response = await Axios.post('/amenity/getAll', data, config)
+        const response = await Axios.post('/amenity/getAll', data, getConfig())
 
         if (response) {
             dispatch({
@@ -149,7 +151,7 @@ export const getAllAmenity = (data, loading) => async (dispatch) => {
 export const addAmenity = (data, loading, navigate) => async (dispatch) => {
     loading(true)
     try {
-        const res = await Axios.post(`/amenity/add`, data, config)
+        const res = await Axios.post(`/amenity/add`, data, getConfig())
         if (res.data.success) {
             toast.success(res.data.message);
             loading(false)
