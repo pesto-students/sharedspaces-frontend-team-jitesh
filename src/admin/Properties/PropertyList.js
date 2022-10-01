@@ -31,9 +31,9 @@ const PropertyList = () => {
                 </div>
 
             </div>
-            <div className='flex h-10 container bg-gray-100 justify-between items-center mb-3 rounded shadow-new'>
-                <h6 className='ml-8 font-bold text-base'>Property</h6>
-                <h6 className='mr-8 font-bold text-base'>Action</h6>
+            <div className='flex justify-between items-center h-10 bg-gray-200 text-gray-600 uppercase text-sm leading-normal shadow-new'>
+                <h6 className='ml-8 font-bold'>Property</h6>
+                <h6 className='mr-8 font-bold'>Actions</h6>
             </div>
             {
                 loading ?

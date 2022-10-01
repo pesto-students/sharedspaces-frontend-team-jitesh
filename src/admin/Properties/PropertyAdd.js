@@ -5,7 +5,7 @@ import Button from '../../components/button/Button'
 import Input from '../../components/input/Input'
 import PropertyMap from '../../components/propertyMap/propertyMap'
 import Textarea from '../../components/textarea/Textarea'
-import { addProperty } from '../../store/actions/adminAction'
+import { addProperty, getAllAmenity } from '../../store/actions/adminAction'
 import {
     GoogleMap,
     LoadScript,
@@ -20,6 +20,22 @@ const PropertyAdd = () => {
     const [values, setValues] = useState({})
     const [addressValues, setAddressValues] = useState({})
     const [loading, setLoading] = useState(false)
+    const [selectedAmenities, setSelectedAmenities] = useState([])
+
+    const allAmenities = useSelector(state => state.admin.allAmenities)
+
+
+    useEffect(() => {
+        dispatch(getAllAmenity(null, (value) => setLoading(value)))
+    }, [])
+
+    useEffect(() => {
+        if (allAmenities) {
+            const amenities = allAmenities.map(a => ({ ...a, selected: false }))
+            setSelectedAmenities(amenities)
+        }
+
+    }, [allAmenities])
 
     const [searchBox, setSearchBox] = React.useState(null);
     const [location, setLocation] = React.useState({
@@ -45,8 +61,11 @@ const PropertyAdd = () => {
         e.preventDefault()
 
         const data = {
-            ...values, ...addressValues
+            ...values,
+            ...addressValues,
+            amenities: selectedAmenities.filter(a => a.selected && a._id).map(a => a._id)
         }
+
         dispatch(
             addProperty(
                 data,
@@ -85,6 +104,15 @@ const PropertyAdd = () => {
         })
     }
 
+    const onSelectAmenity = (id) => {
+        let amenities = selectedAmenities
+        amenities = amenities.map(a => a._id === id ? ({
+            ...a,
+            selected: !a.selected
+        }) : a)
+        setSelectedAmenities([...amenities])
+    }
+
     return (
         <div className="admin-body mb-10">
 
@@ -120,16 +148,7 @@ const PropertyAdd = () => {
                                 onChange={onInputChange}
                                 className="flex flex-col"
                                 required
-                            />
-                            <Textarea
-                                label={"Owner Details"}
-                                name={"ownerDetails"}
-                                type="text"
-                                value={values.ownerDetails}
-                                placeholder='Enter Owner Details'
-                                onChange={onInputChange}
-                                className="flex flex-col"
-                                required
+                                rows={"5"}
                             />
                         </div>
                         <div className="right-section">
@@ -211,11 +230,26 @@ const PropertyAdd = () => {
                         <h1 className="heading text-lg font-bold mt-5 mb-3">Add Amenities Details</h1>
                     </div>
 
+                    <div className="amenity-wrapper flex shadow-new py-3 px-2 rounded mb-10">
+                        {selectedAmenities?.map((amenity, key) =>
+                            <div
+                                onClick={() => onSelectAmenity(amenity._id)}
+                                id={amenity._id}
+                                key={amenity._id}
+                                className={`amenity-item flex items-center justify-center shadow-new px-4 mx-1.5 cursor-pointer py-1 rounded ${amenity.selected ? "bg-gray-400" : ""}`}
+                            >
+                                <img className='w-5 mr-1' src={amenity.amenityImage} alt={amenity.amenityTitle} />
+                                {amenity.amenityTitle}
+                            </div>
+                        )}
+                    </div>
+
+
                     <Button
                         type='submit'
                         buttonType={"dark"}
                         onSubmit={onSubmit}
-                        // onClick={() => setLoading(!loading)}
+                        className="min-w-30"
                         loading={loading}
                     >
                         Submit

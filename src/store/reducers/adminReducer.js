@@ -1,5 +1,5 @@
 import {
-    SET_ADMIN_LOADING, SET_ALL_BOOKING, SET_ALL_PROPERTY, SET_ALL_USER
+    SET_ADMIN_LOADING, SET_ALL_AMENITY, SET_ALL_BOOKING, SET_ALL_PROPERTY, SET_ALL_USER
 } from "../types/adminTypes";
 
 const initalState = {
@@ -28,6 +28,11 @@ const adminReducer = (state = initalState, action) => {
             return {
                 ...state,
                 allBookings: action.payload,
+            };
+        case SET_ALL_AMENITY:
+            return {
+                ...state,
+                allAmenities: action.payload,
             };
         default:
             return state;

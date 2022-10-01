@@ -5,6 +5,7 @@ import './adminSidebar.scss'
 
 const AdminSidebar = () => {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+    const [selectTab, setSelectTab] = useState('null')
     const userDetail = useSelector(state => state.site.userDetail)
 
     useEffect(() => {
@@ -55,8 +56,14 @@ const AdminSidebar = () => {
     return (
         <div className='admin-sidebar bg-gray-800 text-white'>
             <div className="nav-list">
-                {data?.map(tab =>
-                    tab.role.some(r => r === userDetail?.role) && <Link to={tab.link} className="nav-item hover:bg-gray-700 font-medium shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer">
+                {data?.map((tab, key) =>
+                    tab.role.some(r => r === userDetail?.role) &&
+                    <Link
+                        key={key}
+                        to={tab.link}
+                        className={`nav-item hover:bg-gray-700 font-medium shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer ${selectTab == tab.name ? "bg-gray-700" : ""} `}
+                        onClick={() => setSelectTab(tab.name)}
+                    >
                         <img src={tab.icon} alt={tab.name} /> {tab.name}
                     </Link>)
                 }

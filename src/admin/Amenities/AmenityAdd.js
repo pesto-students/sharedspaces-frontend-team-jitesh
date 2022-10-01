@@ -5,10 +5,10 @@ import Button from '../../components/button/Button'
 import ImageUpload from '../../components/imageUpload/ImageUpload'
 import Input from '../../components/input/Input'
 import Textarea from '../../components/textarea/Textarea'
-import { addSpace } from '../../store/actions/adminAction'
-import './spaceAdd.scss'
+import { addAmenity } from '../../store/actions/adminAction'
+import './amenityAdd.scss'
 
-const SpaceAdd = () => {
+const AmenityAdd = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { propertyId } = useParams()
@@ -27,14 +27,13 @@ const SpaceAdd = () => {
 
         const data = {
             ...values,
-            propertyId
         }
 
         dispatch(
-            addSpace(
+            addAmenity(
                 data,
                 (value) => setLoading(value),
-                () => navigate("/admin/property")
+                () => navigate("/admin/amenities")
             )
         )
     }
@@ -42,7 +41,7 @@ const SpaceAdd = () => {
     const uploadPath = (imagePath) => {
         setValues({
             ...values,
-            spaceImage: imagePath
+            amenityImage: imagePath
         })
     }
 
@@ -51,44 +50,24 @@ const SpaceAdd = () => {
         <div className="admin-body mb-10">
 
             <div className="admin-breadcrums mb-3">
-                <Link to="/admin/property" className="heading text-lg font-bold">Properties</Link>
+                <Link to="/admin/amenities" className="heading text-lg font-bold">Amenities</Link>
                 <img className='arrow mx-3' src="/assets/icons/chevron-right.png" alt="" />
-                <div className="heading text-lg font-bold">Add Space</div>
+                <div className="heading text-lg font-bold">Add Amenity</div>
             </div>
 
             <div class="body-section bg-white shadow-new p-5 rounded">
                 <div className="admin-header">
-                    <h1 className="heading text-lg font-bold mb-3">Add Space Details</h1>
+                    <h1 className="heading text-lg font-bold mb-3">Add Amenity Details</h1>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="main-wrapper">
                         <div className='left-section'>
                             <Input
-                                label={"Space Title"}
-                                name={"spaceTitle"}
+                                label={"Amenity Title"}
+                                name={"amenityTitle"}
                                 type="text"
-                                value={values.spaceTitle}
-                                placeholder='Enter Space Title'
-                                onChange={onInputChange}
-                                className="flex flex-col"
-                                required
-                            />
-                            <Textarea
-                                label={"Space Description"}
-                                name={"spaceDescription"}
-                                type="text"
-                                value={values.spaceDescription}
-                                placeholder='Enter Space Description'
-                                onChange={onInputChange}
-                                className="flex flex-col"
-                                required
-                            />
-                            <Input
-                                label={"Number of Desks Available"}
-                                name={"noOfDesks"}
-                                type="number"
-                                value={values.noOfDesks}
-                                placeholder='Enter Number of Desks Available'
+                                value={values.amenityTitle}
+                                placeholder='Enter Amenity Title'
                                 onChange={onInputChange}
                                 className="flex flex-col"
                                 required
@@ -98,7 +77,7 @@ const SpaceAdd = () => {
                             <div className="property-image-wrapper">
                                 <ImageUpload
                                     uploadPath={uploadPath}
-                                    uploadType="space"
+                                    uploadType="amenity"
                                 // id=""
                                 />
                             </div>
@@ -122,4 +101,4 @@ const SpaceAdd = () => {
     )
 }
 
-export default SpaceAdd
+export default AmenityAdd
