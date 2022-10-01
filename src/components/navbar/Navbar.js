@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 import Button from '../button/Button'
 import { Link, useNavigate } from 'react-router-dom'
 import './navbar.scss'
-import AdminNavbar from '../adminNavbar/AdminNavbar';
 import ProfileDropdown from '../profileDropdown/ProfileDropdown'
 
 
