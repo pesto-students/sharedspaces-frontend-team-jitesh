@@ -29,6 +29,8 @@ import PropertyList from "./admin/Properties/PropertyList";
 import SpaceAdd from "./admin/Properties/SpaceAdd";
 import Amenities from "./admin/Amenities/Amenities";
 import AmenityAdd from "./admin/Amenities/AmenityAdd";
+import ProfilePage from "./pages/profilePage/ProfilePage";
+import MyProfile from "./pages/profilePage/MyProfile";
 
 function App() {
   const location = useLocation()
@@ -60,6 +62,16 @@ function App() {
         <Route path="/property/:propertyId" element={<PropertyPage />} />
         <Route path="/space/:propertyId/:spaceId" element={<SpacePage />} />
         <Route path="/list-your-space" element={<ListYourSpacePage />} />
+
+        {/* // Profile Routes */}
+        <Route path="/profile" element={<ProfilePage />} >
+          <Route path="/profile/my-profile" element={<MyProfile />} />
+          <Route path="/profile/my-bookings" element={<MyProfile />} />
+          <Route path="/profile/liked-locations" element={<MyProfile />} />
+          <Route path="/profile/change-password" element={<MyProfile />} />
+          <Route path="/profile/settings" element={<MyProfile />} />
+        </Route>
+
 
 
         {/* // Admin Routes */}

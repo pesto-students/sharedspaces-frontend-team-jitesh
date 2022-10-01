@@ -7,3 +7,5 @@ export const SET_PROPERTY = "site/SET_PROPERTY";
 
 export const SET_ALL_SPACE = "site/SET_ALL_SPACE";
 export const SET_SPACE = "site/SET_SPACE";
+
+export const SET_PROFILE = "site/SET_PROFILE";

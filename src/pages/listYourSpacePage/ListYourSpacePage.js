@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate } from "react-router-dom";
 import Button from '../../components/button/Button'
-import { onUpdateUserRole } from '../../store/actions/siteAction';
+import { onUpdateUserProfile } from '../../store/actions/siteAction';
 import './listYourSpacePage.scss'
 
 const ListYourSpacePage = () => {
@@ -24,7 +24,7 @@ const ListYourSpacePage = () => {
 
     const onStartNow = () => {
         dispatch(
-            onUpdateUserRole(userDetail._id,
+            onUpdateUserProfile(userDetail._id, { role: "Landlord" },
                 (value) => setLoading(value),
                 () => navigate('/admin/property')
             )
@@ -44,7 +44,9 @@ const ListYourSpacePage = () => {
             <Button
                 buttonType={"primary"}
                 onClick={onStartNow}
-                loading={loading}>
+                loading={loading}
+                className="min-w-30"
+            >
                 Start Now
             </Button>
         </div>

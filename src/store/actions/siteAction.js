@@ -2,16 +2,22 @@ import Axios from "../../Axios";
 import {
   SET_ALL_PROPERTY,
   SET_ALL_SPACE,
-  SET_LOGIN_LOADING, SET_PROPERTY, SET_SPACE, SET_USER_DETAIL,
+  SET_LOGIN_LOADING,
+  SET_PROPERTY,
+  SET_SPACE,
+  SET_USER_DETAIL,
 } from "../types/siteTypes";
 import { toast } from 'react-toastify';
 
-const userDetail = JSON.parse(localStorage.getItem("ss_user"))
-const config = {
-  headers: {
-    Authorization: `Bearer ${userDetail?.token}`,
-  },
-};
+
+const getConfig = () => {
+  const userDetail = JSON.parse(localStorage.getItem("ss_user"))
+  return {
+    headers: {
+      Authorization: `Bearer ${userDetail?.token}`,
+    },
+  };
+}
 
 // SET LOGIN LOADING
 export const setLoginLoading = (data) => (dispatch) => {
@@ -167,7 +173,7 @@ export const getSpace = (spaceId, loading) => async (dispatch) => {
 export const addBooking = (data, loading, completed) => async (dispatch) => {
   loading(true)
   try {
-    const res = await Axios.post(`/booking/add`, data, config)
+    const res = await Axios.post(`/booking/add`, data, getConfig())
     if (res.data.success) {
       toast.success(res.data.message);
       loading(false)
@@ -185,20 +191,27 @@ export const addBooking = (data, loading, completed) => async (dispatch) => {
 };
 
 
-export const onUpdateUserRole = (userId, loading, navigate) => async (dispatch) => {
+export const onUpdateUserProfile = (userId, data, loading, navigate) => async (dispatch) => {
   loading(true)
   try {
-    const res = await Axios.put(`/user/updateUserRole/${userId}`, {}, config)
+    const res = await Axios.put(`/user/updateUserProfile/${userId}`, data, getConfig())
     if (res.data.success) {
       toast.success(res.data.message);
 
 
       const userDetail = JSON.parse(localStorage.getItem('ss_user'))
-      userDetail.role = "Landlord"
+      const newUserDetail = {
+        ...res.data.data,
+        token: userDetail.token
+      }
 
       // Setting up data in localstorage and redux
-      localStorage.setItem("ss_user", JSON.stringify(userDetail))
-      setUserDetail(userDetail)
+      localStorage.setItem("ss_user", JSON.stringify(newUserDetail))
+      dispatch({
+        type: SET_USER_DETAIL,
+        payload: newUserDetail,
+      });
+
       loading(false)
       navigate()
     } else {
