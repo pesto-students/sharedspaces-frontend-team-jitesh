@@ -7,7 +7,8 @@ import Loader from "../loader/Loader";
 const ProfileImageUpload = ({
     uploadType,
     id,
-    uploadPath
+    uploadPath,
+    placeHolderImage
 }) => {
     const [file, setFile] = useState();
     const [loading, setLoading] = useState(false)
@@ -55,8 +56,7 @@ const ProfileImageUpload = ({
                     ) : (
                         <img
                             className="uploaded-image rounded"
-                            src={"/assets/images/blank-profile.png"
-                            }
+                            src={placeHolderImage ? placeHolderImage : "/assets/images/blank-profile.png"}
                             alt=""
                         />
                     )}
