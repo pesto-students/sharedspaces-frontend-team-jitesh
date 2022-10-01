@@ -27,9 +27,9 @@ const PropertyAccordien = ({ property, spaces }) => {
                 visible &&
                 <div className='rounded fade-in'>
                     {
-                        spaces.length > 0 ? spaces.map(item => {
+                        spaces.length > 0 ? spaces.map((item, key) => {
                             return (
-                                <div className="py-3 px-3 flex justify-between">
+                                <div key={key} className="py-3 px-3 flex justify-between">
                                     <div className='flex item-center'>
                                         <div >
                                             <img src={item.spaceImage} className='w-24 mr-5 rounded' />

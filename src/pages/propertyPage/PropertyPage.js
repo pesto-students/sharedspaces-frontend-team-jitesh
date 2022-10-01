@@ -57,16 +57,28 @@ const PropertyPage = () => {
                             <p className="text-1xl text-gray-500">{property?.propertyDescription}</p>
 
 
-                            <h2 className="text-lg font-bold mt-10 mb-2">Amenities</h2>
-                            <div className="amenities-list">
-                                <div className="amenities-item">
-                                    <p className="text-1xl text-gray-500">It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
-                            </div>
-
-
                             <h2 className="text-lg font-bold mt-10 mb-2">Owner Details</h2>
                             <p className="text-1xl text-gray-500">It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+
+                            <h2 className="text-lg font-bold mt-10">Amenities</h2>
+                            <div className="amenity-wrapper flex py-3 mb-10">
+                                {property?.amenities?.map((amenity, key) =>
+                                    <div
+                                        id={amenity._id}
+                                        key={amenity._id}
+                                        className='amenity-item w-30 flex items-center justify-center shadow-new px-5 cursor-pointer py-2 rounded mr-3'
+                                    >
+                                        <img
+                                            className='w-6 mr-2'
+                                            src={amenity.amenityImage}
+                                            alt={amenity.amenityTitle}
+                                        />
+                                        {amenity.amenityTitle}
+                                    </div>
+                                )}
+                            </div>
+
 
 
                             <h2 className="text-lg font-bold mt-10 mb-3">Available Spaces</h2>

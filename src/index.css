@@ -25,6 +25,10 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 
+  .min-w-30 {
+    min-width: 120px;
+  }
+
   .fade-in-bottom {
     -webkit-animation: fade-in-bottom 0.6s cubic-bezier(0.39, 0.575, 0.565, 1)
       both;

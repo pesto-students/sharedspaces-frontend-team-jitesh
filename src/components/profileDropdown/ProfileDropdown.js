@@ -35,9 +35,9 @@ const ProfileDropdown = () => {
 
     const menu = (
         <div class="dropdown-body rounded shadow bg-white overflow-hidden peer-checked:flex flex-col mt-1 border border-gray-200">
-            {dropdownList.map(d =>
+            {dropdownList.map((d, key) =>
                 d?.role?.some(r => r === userDetail?.role) &&
-                <div class="cursor-pointer group">
+                <div key={key} class="cursor-pointer group">
                     <Link to={d.link} onClick={d.function}
                         class="block transition duration-150 ease-in-out text-sm py-2 pl-3 pr-5 border-transparent border-l-4 group-hover:border-red-500 group-hover:bg-gray-100"
                     >

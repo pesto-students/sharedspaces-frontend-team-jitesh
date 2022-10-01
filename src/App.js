@@ -27,6 +27,8 @@ import Users from "./admin/Users/Users";
 import PropertyAdd from "./admin/Properties/PropertyAdd";
 import PropertyList from "./admin/Properties/PropertyList";
 import SpaceAdd from "./admin/Properties/SpaceAdd";
+import Amenities from "./admin/Amenities/Amenities";
+import AmenityAdd from "./admin/Amenities/AmenityAdd";
 
 function App() {
   const location = useLocation()
@@ -68,6 +70,8 @@ function App() {
           <Route path="/admin/property" element={<PropertyList />} />
           <Route path="/admin/property/add" element={<PropertyAdd />} />
           <Route path="/admin/space/add/:propertyId" element={<SpaceAdd />} />
+          <Route path="/admin/amenities" element={<Amenities />} />
+          <Route path="/admin/amenities/add" element={<AmenityAdd />} />
         </Route>
       </Routes>
 
