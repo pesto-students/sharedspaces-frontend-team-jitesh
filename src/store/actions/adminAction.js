@@ -1,6 +1,6 @@
 import Axios from "../../Axios";
 import {
-    SET_ADMIN_LOADING, SET_ALL_AMENITY, SET_ALL_BOOKING, SET_ALL_PROPERTY, SET_ALL_USER
+    SET_ADMIN_LOADING, SET_ALL_AMENITY, SET_ALL_BOOKING, SET_ALL_PROPERTY, SET_ALL_USER, SET_DASHBOARD_TOTALS
 } from "../types/adminTypes";
 import { toast } from 'react-toastify';
 
@@ -20,6 +20,27 @@ export const setAdminLoading = (data) => (dispatch) => {
         type: SET_ADMIN_LOADING,
         payload: data,
     });
+};
+
+export const getDashboardTotals = (loading) => async (dispatch) => {
+    loading(true)
+    try {
+        const response = await Axios.get('/common/dashboard/getAll', getConfig())
+
+        if (response) {
+            console.log(response)
+            dispatch({
+                type: SET_DASHBOARD_TOTALS,
+                payload: response.data.data
+            })
+            loading(false)
+        } else {
+            loading(false)
+        }
+    } catch (error) {
+        console.log("error", error.response);
+        // toast.error(res.data.message);
+    }
 };
 
 
@@ -109,7 +130,7 @@ export const getAllUser = (data, loading) => async (dispatch) => {
 export const getAllBooking = (data, loading) => async (dispatch) => {
     loading(true)
     try {
-        const response = await Axios.post('/booking/getAll', data, getConfig())
+        const response = await Axios.post('/booking/admin/getAll', data, getConfig())
 
         if (response) {
             dispatch({

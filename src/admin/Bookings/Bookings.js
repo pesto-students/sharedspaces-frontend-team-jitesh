@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Loader from '../../components/loader/Loader'
 import moment from 'moment'
 
-const Bookings = () => {
+const Bookings = ({ bookingName }) => {
     const dispatch = useDispatch()
     const allBookings = useSelector(state => state.admin.allBookings)
 
@@ -21,7 +21,7 @@ const Bookings = () => {
     return (
         <div className="admin-body">
             <div className="admin-header">
-                <h1 className="heading text-lg font-bold mb-3">Bookings</h1>
+                <h1 className="heading text-lg font-bold mb-3">{bookingName ? bookingName : "Bookings"}</h1>
             </div>
 
             {
