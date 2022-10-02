@@ -21,7 +21,7 @@ const Dashboard = () => {
                     <Loader width={"w-10"} className={"text-gray-200"} />
                     :
                     <div className="dashboard-list fade-in-bottom">
-                        <div className="dashboard-item shadow-new rounded font-bold">
+                        {dashboardTotals?.totalUser && <div className="dashboard-item shadow-new rounded font-bold">
                             <div className="flex flex-col w-40">
                                 <div className='flex items-center'>
                                     {/* <img className='icon' src="/assets/icons/users-black.png" alt="" /> */}
@@ -30,9 +30,9 @@ const Dashboard = () => {
                                 Total Users
                             </div>
                             <img className='arrow' src="/assets/icons/chevron-right.png" alt="" />
-                        </div>
+                        </div>}
 
-                        <div className="dashboard-item shadow-new rounded font-bold">
+                        {dashboardTotals?.totalLandlord && <div className="dashboard-item shadow-new rounded font-bold">
                             <div className="flex flex-col w-40">
                                 <div className='flex items-center'>
                                     {/* <img className='icon' src="/assets/icons/landlords-black.png" alt="" /> */}
@@ -41,7 +41,7 @@ const Dashboard = () => {
                                 Total Landlords
                             </div>
                             <img className='arrow' src="/assets/icons/chevron-right.png" alt="" />
-                        </div>
+                        </div>}
 
 
                         <div className="dashboard-item shadow-new rounded font-bold">
