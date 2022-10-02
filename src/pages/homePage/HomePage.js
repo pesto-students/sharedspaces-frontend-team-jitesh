@@ -81,28 +81,29 @@ const HomePage = () => {
                 Popular Properties
               </h1>
 
-              {loading &&
+              {loading ?
                 <div className="flex w-100 justify-center mt-10">
                   <Loader width={"w-10"} className={"text-gray-200"} />
+                </div> :
+
+                <div className="property-list">
+                  {allProperties?.slice(0, 3)?.map(property =>
+                    <Link to={`/property/${property._id}`} className="property-item bg-white shadow-new fade-in-bottom">
+                      <div className="property-image">
+                        <img src={property.propertyImage} alt={property.propertyTitle} />
+                      </div>
+                      <div className="property-description">
+                        <p className="text-lg font-bold">{property.propertyTitle}</p>
+                        <p className="text-sm text-gray-500">{property.address}</p>
+                        <hr className="my-3" />
+                        <Link to={`/property/${property._id}`} className="flex justify-end">
+                          <Button buttonType={"primary"}>Book</Button>
+                        </Link>
+                      </div>
+                    </Link>
+                  )}
                 </div>
               }
-              <div className="property-list">
-                {allProperties?.slice(0, 3)?.map(property =>
-                  <Link to={`/property/${property._id}`} className="property-item bg-white shadow-new fade-in-bottom">
-                    <div className="property-image">
-                      <img src={property.propertyImage} alt={property.propertyTitle} />
-                    </div>
-                    <div className="property-description">
-                      <p className="text-lg font-bold">{property.propertyTitle}</p>
-                      <p className="text-sm text-gray-500">{property.address}</p>
-                      <hr className="my-3" />
-                      <Link to={`/property/${property._id}`} className="flex justify-end">
-                        <Button buttonType={"primary"}>Book</Button>
-                      </Link>
-                    </div>
-                  </Link>
-                )}
-              </div>
             </div>
           </div>
 

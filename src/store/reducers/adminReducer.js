@@ -1,5 +1,5 @@
 import {
-    SET_ADMIN_LOADING, SET_ALL_AMENITY, SET_ALL_BOOKING, SET_ALL_PROPERTY, SET_ALL_USER
+    SET_ADMIN_LOADING, SET_ALL_AMENITY, SET_ALL_BOOKING, SET_ALL_PROPERTY, SET_ALL_USER, SET_DASHBOARD_TOTALS
 } from "../types/adminTypes";
 
 const initalState = {
@@ -13,6 +13,11 @@ const adminReducer = (state = initalState, action) => {
                 ...state,
                 isAdminLoading: action.payload,
 
+            };
+        case SET_DASHBOARD_TOTALS:
+            return {
+                ...state,
+                dashboardTotals: action.payload,
             };
         case SET_ALL_USER:
             return {

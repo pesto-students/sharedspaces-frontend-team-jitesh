@@ -135,7 +135,7 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
                                         type='submit'
                                         buttonType={"dark"}
                                         onSubmit={onSubmit}
-                                        // onClick={() => setLoading(!loading)}
+                                        className="min-w-30"
                                         loading={loading}
                                     >
                                         Book
