@@ -3,6 +3,7 @@ import {
   SET_ALL_PROPERTY,
   SET_ALL_SPACE,
   SET_LOGIN_LOADING,
+  SET_MY_BOOKING,
   SET_PROPERTY,
   SET_SPACE,
   SET_USER_DETAIL,
@@ -186,6 +187,27 @@ export const addBooking = (data, loading, completed) => async (dispatch) => {
   } catch (error) {
     console.log("error", error.response);
     loading(false)
+    // toast.error(res.data.message);
+  }
+};
+
+
+export const getMyBookings = (data, loading) => async (dispatch) => {
+  loading(true)
+  try {
+    const response = await Axios.post('/booking/user/getAll', data, getConfig())
+
+    if (response) {
+      dispatch({
+        type: SET_MY_BOOKING,
+        payload: response.data.data
+      })
+      loading(false)
+    } else {
+      loading(false)
+    }
+  } catch (error) {
+    console.log("error", error.response);
     // toast.error(res.data.message);
   }
 };

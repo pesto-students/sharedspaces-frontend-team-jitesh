@@ -1,7 +1,7 @@
 import {
   SET_ALL_PROPERTY,
   SET_ALL_SPACE,
-  SET_LOGIN_LOADING, SET_PROPERTY, SET_SPACE, SET_USER_DETAIL,
+  SET_LOGIN_LOADING, SET_MY_BOOKING, SET_PROPERTY, SET_SPACE, SET_USER_DETAIL,
 } from "../types/siteTypes";
 
 const initalState = {
@@ -40,6 +40,11 @@ const siteReducer = (state = initalState, action) => {
       return {
         ...state,
         space: action.payload,
+      };
+    case SET_MY_BOOKING:
+      return {
+        ...state,
+        myBookings: action.payload,
       };
     default:
       return state;

@@ -64,8 +64,8 @@ const MyProfile = () => {
     return (
 
         <div>
-            <div className="flex items-center justify-between">
-                <text className="text-2xl font-bold">Profile</text>
+            <div className="flex justify-between">
+                <text className="text-2xl font-bold">My Profile</text>
                 <Button buttonType="primary" className="ml-2" onClick={() => setUpdateState(!updateState)}>Update Profile</Button>
             </div>
             <div className="flex items-center shadow-new mt-5 p-10 rounded">
