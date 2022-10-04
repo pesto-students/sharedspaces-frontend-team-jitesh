@@ -1,0 +1,21 @@
+.main-profile-wrapper {
+    padding-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    .profile-wrapper {
+        width: 100%;
+        display: flex;
+        .left-section {
+            width: 20%;
+            position: relative;
+            .profile-small-image {
+                width: 30px;
+                border-radius: 30px;
+            }
+        }
+        .right-section {
+            width: 75%;
+            margin-left: 5%;
+        }
+    }
+}

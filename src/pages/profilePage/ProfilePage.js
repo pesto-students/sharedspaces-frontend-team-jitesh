@@ -22,7 +22,6 @@ const ProfilePage = () => {
 
     return (
         <div className="main-profile-wrapper py-10">
-            <Button buttonType="primary-outline" className="mb-10">Go Back</Button>
             <div className="profile-wrapper">
                 <div className="left-section">
                     <ProfileSidebar userDetail={userDetail} />

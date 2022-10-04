@@ -54,7 +54,7 @@ const PropertyAccordien = ({ property, spaces }) => {
                 </div>
             }
 
-        </div >
+        </div>
     )
 }
 

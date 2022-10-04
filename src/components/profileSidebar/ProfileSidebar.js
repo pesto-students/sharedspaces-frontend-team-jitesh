@@ -84,7 +84,7 @@ const ProfileSidebar = ({ userDetail }) => {
 
 
     return (
-        <div className="flex flex-wrap border-2 border-red-500 rounded">
+        <div className="profile-sidebar flex flex-wrap border-2 border-red-500 rounded">
             <div className="w-full flex flex-wrap border-b-2 border-red-500 justify-center">
                 <div className="flex items-center justify-center w-full m-4 p-2 border bg-red-200 border-red-500/100 rounded justify-center content-center space-between space-x-2">
                     <img

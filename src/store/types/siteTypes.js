@@ -9,3 +9,4 @@ export const SET_ALL_SPACE = "site/SET_ALL_SPACE";
 export const SET_SPACE = "site/SET_SPACE";
 
 export const SET_PROFILE = "site/SET_PROFILE";
+export const SET_MY_BOOKING = "site/SET_MY_BOOKING";
