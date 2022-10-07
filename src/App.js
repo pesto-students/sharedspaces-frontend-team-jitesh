@@ -32,6 +32,7 @@ import AmenityAdd from "./admin/Amenities/AmenityAdd";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import MyProfile from "./pages/profilePage/MyProfile";
 import MyBookings from "./pages/profilePage/MyBookings";
+import MyLikedProperty from "./pages/profilePage/MyLikedProperty";
 
 function App() {
   const location = useLocation()
@@ -68,7 +69,7 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} >
           <Route path="/profile/my-profile" element={<MyProfile />} />
           <Route path="/profile/my-bookings" element={<MyBookings />} />
-          <Route path="/profile/liked-locations" element={<MyProfile />} />
+          <Route path="/profile/liked-properties" element={<MyLikedProperty />} />
           <Route path="/profile/change-password" element={<MyProfile />} />
           <Route path="/profile/settings" element={<MyProfile />} />
         </Route>

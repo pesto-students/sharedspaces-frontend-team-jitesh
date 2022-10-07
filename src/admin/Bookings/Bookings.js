@@ -94,9 +94,6 @@ const Bookings = ({ bookingName }) => {
                                         </td>
                                     </tr>
                                 )}
-
-
-
                             </tbody>
                         </table>
                     </div>}
