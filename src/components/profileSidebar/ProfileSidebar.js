@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './profileSidebar.scss'
 
 const ProfileSidebar = ({ userDetail }) => {
+    const location = useLocation()
     const [selected, setSelected] = useState('My Profile')
     const data = [
         {
@@ -36,7 +37,7 @@ const ProfileSidebar = ({ userDetail }) => {
             link: "/profile/my-bookings",
         },
         {
-            name: "Liked Locations",
+            name: "Liked Properties",
             icon: (className) =>
             (
                 <svg
@@ -48,7 +49,7 @@ const ProfileSidebar = ({ userDetail }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
             ),
-            link: "/profile/liked-locations",
+            link: "/profile/liked-properties",
         },
         {
             name: "Change Password",
@@ -102,10 +103,10 @@ const ProfileSidebar = ({ userDetail }) => {
                         to={tab.link}
                         key={key}
                         onClick={() => setSelected(tab.name)}
-                        className={`${selected === tab.name ? "bg-red-500 text-white" : ""} flex group items-center px-4 py-2.5 text-red-500 w-full border-b-2 border-red-500 hover:text-white hover:bg-red-500 transition duration-150 ease-in-out cursor-pointer`}
+                        className={`${location.pathname === tab.link ? "bg-red-500 text-white" : ""} flex group items-center px-4 py-2.5 text-red-500 w-full border-b-2 border-red-500 hover:text-white hover:bg-red-500 transition duration-150 ease-in-out cursor-pointer`}
                     >
-                        {tab.icon(selected === tab.name ? "stroke-white" : "")}
-                        <p className={selected === tab.name ? "bg-red-500 text-white" : ""}> {tab.name}</p>
+                        {tab.icon(location.pathname === tab.link ? "stroke-white" : "")}
+                        <p className={location.pathname === tab.link ? "text-red-500 text-white" : ""}> {tab.name}</p>
                     </Link>
                 )
             }

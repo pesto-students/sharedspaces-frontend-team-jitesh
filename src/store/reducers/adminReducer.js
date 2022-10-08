@@ -3,7 +3,6 @@ import {
 } from "../types/adminTypes";
 
 const initalState = {
-    space: {}
 };
 
 const adminReducer = (state = initalState, action) => {
@@ -32,7 +31,7 @@ const adminReducer = (state = initalState, action) => {
         case SET_ALL_BOOKING:
             return {
                 ...state,
-                allBookings: action.payload,
+                allBookings: action.payload.reverse(),
             };
         case SET_ALL_AMENITY:
             return {

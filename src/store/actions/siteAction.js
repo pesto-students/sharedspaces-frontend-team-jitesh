@@ -20,6 +20,18 @@ const getConfig = () => {
   };
 }
 
+
+export const getUserId = () => {
+  if (localStorage.getItem("ss_user")) {
+    const userDetail = JSON.parse(localStorage.getItem("ss_user"))
+    return userDetail?._id
+  } else {
+    return false
+  }
+}
+
+
+
 // SET LOGIN LOADING
 export const setLoginLoading = (data) => (dispatch) => {
   dispatch({
@@ -108,10 +120,10 @@ export const getAllProperty = (data, loading) => async (dispatch) => {
 };
 
 
-export const getProperty = (propertyId, loading) => async (dispatch) => {
+export const getProperty = (data, loading) => async (dispatch) => {
   loading(true)
   try {
-    const response = await Axios.get(`/property/${propertyId}`)
+    const response = await Axios.post(`/property/getOne`, data, getConfig())
 
     if (response) {
       dispatch({
@@ -248,4 +260,37 @@ export const onUpdateUserProfile = (userId, data, loading, navigate) => async (d
   }
 };
 
+
+
+export const onLikedProperty = (propertyId, getAllProperty, loading) => async (dispatch) => {
+  loading(true)
+  try {
+    const response = await Axios.get(`/user/liked/${propertyId}`, getConfig())
+
+    if (response) {
+      getAllProperty()
+    } else {
+      loading(false)
+    }
+  } catch (error) {
+    console.log("error", error.response);
+    // toast.error(res.data.message);
+  }
+};
+
+export const onUnlikedProperty = (propertyId, getAllProperty, loading) => async (dispatch) => {
+  loading(true)
+  try {
+    const response = await Axios.get(`/user/unliked/${propertyId}`, getConfig())
+
+    if (response) {
+      getAllProperty()
+    } else {
+      loading(false)
+    }
+  } catch (error) {
+    console.log("error", error.response);
+    // toast.error(res.data.message);
+  }
+};
 

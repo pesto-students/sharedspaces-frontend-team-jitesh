@@ -5,7 +5,7 @@ import SearchInput from "../../components/searchInput/SearchInput";
 import Button from "../../components/button/Button";
 import Footer from "../../components/footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllProperty } from '../../store/actions/siteAction'
+import { getAllProperty, onLikedProperty, onUnlikedProperty, getUserId } from '../../store/actions/siteAction'
 import Loader from '../../components/loader/Loader'
 
 const HomePage = () => {
@@ -20,6 +20,9 @@ const HomePage = () => {
 
   useEffect(() => {
     let data = {}
+    if (getUserId()) {
+      data.userId = getUserId()
+    }
     dispatch(getAllProperty(data, (value) => setLoading(value)))
   }, [])
 
@@ -42,6 +45,34 @@ const HomePage = () => {
     }
   }
 
+
+  const onLiked = (propertyId) => {
+    let data = {}
+    if (getUserId()) {
+      data.userId = getUserId()
+    }
+    dispatch(
+      onLikedProperty(
+        propertyId,
+        () => dispatch(getAllProperty(data, (value) => setLoading(value))),
+        (value) => setLoading(value)
+      )
+    )
+  }
+
+  const onUnliked = (propertyId) => {
+    let data = {}
+    if (getUserId()) {
+      data.userId = getUserId()
+    }
+    dispatch(
+      onUnlikedProperty(
+        propertyId,
+        () => dispatch(getAllProperty(data, (value) => setLoading(value))),
+        (value) => setLoading(value)
+      )
+    )
+  }
 
   return (
     <>
@@ -86,19 +117,29 @@ const HomePage = () => {
 
                 <div className="property-list">
                   {allProperties?.slice(0, 3)?.map(property =>
-                    <Link to={`/property/${property._id}`} className="property-item bg-white shadow-new fade-in-bottom">
+                    <div className="property-item bg-white shadow-new fade-in-bottom">
                       <div className="property-image">
-                        <img src={property.propertyImage} alt={property.propertyTitle} />
-                      </div>
-                      <div className="property-description">
-                        <p className="text-lg font-bold">{property.propertyTitle}</p>
-                        <p className="text-sm text-gray-500">{property.address}</p>
-                        <hr className="my-3" />
-                        <Link to={`/property/${property._id}`} className="flex justify-end">
-                          <Button buttonType={"primary"}>Book</Button>
+                        <Link to={`/property/${property._id}`}>
+                          <img src={property.propertyImage} alt={property.propertyTitle} />
                         </Link>
+                        {isUserLoggedIn ?
+                          property.likedProperty
+                            ? <img className="liked-wrapper" src={"/assets/icons/liked.png"} alt={property.propertyTitle} onClick={() => onUnliked(property._id)} />
+                            : <img className="liked-wrapper" src={"/assets/icons/unliked.png"} alt={property.propertyTitle} onClick={() => onLiked(property._id)} />
+                          : null
+                        }
                       </div>
-                    </Link>
+                      <Link to={`/property/${property._id}`}>
+                        <div className="property-description">
+                          <p className="text-lg font-bold">{property.propertyTitle}</p>
+                          <p className="text-sm text-gray-500">{property.address}</p>
+                          <hr className="my-3" />
+                          <Link to={`/property/${property._id}`} className="flex justify-end">
+                            <Button buttonType={"primary"}>Book</Button>
+                          </Link>
+                        </div>
+                      </Link>
+                    </div>
                   )}
                 </div>
               }

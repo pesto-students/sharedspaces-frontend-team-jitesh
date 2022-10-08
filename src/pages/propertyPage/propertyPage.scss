@@ -26,6 +26,13 @@
         }
     }
 
+    .property-title {
+        width: 100%;
+        .liked-wrapper {
+            width: 40px;
+            height: 40px;
+        }
+    }
     .property-description {
         width: 80%;
         .space-list {
