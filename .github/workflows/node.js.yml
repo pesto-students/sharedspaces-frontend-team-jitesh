@@ -27,3 +27,4 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm run build
+    - run: cp -R /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh/build /var/www
