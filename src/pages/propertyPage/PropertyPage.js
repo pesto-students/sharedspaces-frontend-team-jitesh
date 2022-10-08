@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import './propertyPage.scss'
 import Button from '../../components/button/Button'
 import { Link, useParams, useNavigate } from 'react-router-dom'
-import { getProperty } from '../../store/actions/siteAction'
+import { getProperty, getUserId, onLikedProperty, onUnlikedProperty } from '../../store/actions/siteAction'
 import Loader from '../../components/loader/Loader'
 import PropertyMap from '../../components/propertyMap/propertyMap'
 
@@ -12,19 +12,66 @@ const PropertyPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { propertyId } = useParams();
-    const property = useSelector(state => state.site.property)
-
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const [loading, setLoading] = useState(false)
 
+
+    const userDetail = useSelector(state => state.site.userDetail)
+    const property = useSelector(state => state.site.property)
+
     useEffect(() => {
+        if (userDetail) {
+            setIsUserLoggedIn(true)
+        }
+    }, [userDetail, userDetail?.token, userDetail?.role])
+
+    useEffect(() => {
+        const data = {
+            propertyId,
+        }
+        if (getUserId()) {
+            data.userId = getUserId()
+        }
         dispatch(
             getProperty(
-                propertyId,
+                data,
                 (value) => setLoading(value),
-                () => navigate("/admin/property")
             )
         )
     }, [])
+
+    const onLiked = (propertyId) => {
+        const data = {
+            propertyId
+        }
+        if (getUserId()) {
+            data.userId = getUserId()
+        }
+        dispatch(
+            onLikedProperty(
+                propertyId,
+                () => dispatch(getProperty(data, (value) => setLoading(value))),
+                (value) => setLoading(value)
+            )
+        )
+    }
+
+    const onUnliked = (propertyId) => {
+        const data = {
+            propertyId
+        }
+        if (getUserId()) {
+            data.userId = getUserId()
+        }
+        dispatch(
+            onUnlikedProperty(
+                propertyId,
+                () => dispatch(getProperty(data, (value) => setLoading(value))),
+                (value) => setLoading(value)
+            )
+        )
+    }
+
     return (
         <>
             {loading ?
@@ -49,10 +96,23 @@ const PropertyPage = () => {
                                 />
                             </div>
                         </div>
-                        <div className="property-description">
-                            <p className="text-3xl font-bold">{property?.propertyTitle}</p>
-                            <p className="text-1xl text-gray-500">{property?.address}</p>
+                        <div className="property-title">
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <p className="text-3xl font-bold mb-3">{property?.propertyTitle}</p>
+                                    <p className="text-1xl text-gray-500">{property?.address}</p>
+                                </div>
 
+                                {isUserLoggedIn ?
+                                    property.likedProperty
+                                        ? <img className="liked-wrapper" src={"/assets/icons/liked.png"} alt={property.propertyTitle} onClick={() => onUnliked(property._id)} />
+                                        : <img className="liked-wrapper" src={"/assets/icons/unliked.png"} alt={property.propertyTitle} onClick={() => onLiked(property._id)} />
+                                    : null
+                                }
+
+                            </div>
+                        </div>
+                        <div className="property-description">
                             <h2 className="text-lg font-bold mt-10 mb-2">Description</h2>
                             <p className="text-1xl text-gray-500">{property?.propertyDescription}</p>
 

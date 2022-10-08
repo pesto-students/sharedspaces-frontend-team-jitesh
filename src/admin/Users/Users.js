@@ -32,47 +32,47 @@ const Users = () => {
                         <table class="min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-left">Full Name</th>
-                                    <th class="py-3 px-6 text-left">Email ID</th>
-                                    <th class="py-3 px-6 text-left">Phone Number</th>
-                                    <th class="py-3 px-6 text-left">Register Date</th>
-                                    <th class="py-3 px-6 text-center">Role</th>
-                                    <th class="py-3 px-6 text-center">Status</th>
-                                    {/* <th class="py-3 px-6 text-center">Actions</th> */}
+                                    <th class="py-3 px-4 text-left">Full Name</th>
+                                    <th class="py-3 px-4 text-left">Email ID</th>
+                                    <th class="py-3 px-4 text-left">Phone Number</th>
+                                    <th class="py-3 px-4 text-left">Register Date</th>
+                                    <th class="py-3 px-4 text-center">Role</th>
+                                    <th class="py-3 px-4 text-center">Status</th>
+                                    {/* <th class="py-3 px-4 text-center">Actions</th> */}
                                 </tr>
                             </thead>
                             <tbody class="text-gray-600 text-sm">
                                 {allUsers?.map((user, key) =>
                                     <tr key={key} class="border-b border-gray-200 hover:bg-gray-100">
 
-                                        <td class="py-3 px-6 text-left">
+                                        <td class="py-3 px-4 text-left">
                                             <div class="flex items-center">
                                                 <span>{user.name}</span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-6 text-left">
+                                        <td class="py-3 px-4 text-left">
                                             <div class="flex items-center">
                                                 <span>{user.email}</span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-6 text-left">
+                                        <td class="py-3 px-4 text-left">
                                             <div class="flex items-center">
                                                 <span> {user.phoneNumber}</span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-6 text-left">
+                                        <td class="py-3 px-4 text-left">
                                             <div class="flex items-center">
                                                 <span>{moment(user.createdAt).format("DD-MM-YYYY")}</span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-6 text-center">
+                                        <td class="py-3 px-4 text-center">
                                             <span class="bg-gray-200 text-gray-600 py-1 px-3 rounded-full text-xs">{user.role}</span>
 
                                         </td>
-                                        <td class="py-3 px-6 text-center">
+                                        <td class="py-3 px-4 text-center">
                                             {user ? <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">Active</span> : <span class="bg-red-200 text-red-600 py-1 px-3 rounded-full text-xs">Deactive</span>}
                                         </td>
-                                        {/* <td class="py-3 px-6 text-center">
+                                        {/* <td class="py-3 px-4 text-center">
                                     <div class="flex item-center justify-center">
                                         <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

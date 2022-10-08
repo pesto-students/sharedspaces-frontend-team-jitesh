@@ -77,7 +77,15 @@
                 border-radius: 8px;
                 overflow: hidden;
                 .property-image {
+                    position: relative;
                     width: 100%;
+                    .liked-wrapper {
+                        position: absolute;
+                        top: 5px;
+                        right: 5px;
+                        width: 25px;
+                        height: 25px;
+                    }
                 }
                 .property-description {
                     padding: 10px;
