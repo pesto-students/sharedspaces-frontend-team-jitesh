@@ -37,4 +37,4 @@ jobs:
       if: steps.cache-deps.outputs.cache-hit != 'true'
       run: npm install
     - run: npm run build
-    - run: cp -R /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh/build /var/www
+    - run: sudo cp -R /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh/build /var/www
