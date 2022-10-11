@@ -24,6 +24,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - run: npm i
     - run: npm run build
     - run: sudo cp -R /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh/build /var/www
