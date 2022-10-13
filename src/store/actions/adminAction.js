@@ -1,6 +1,6 @@
 import Axios from "../../Axios";
 import {
-    SET_ADMIN_LOADING, SET_ALL_AMENITY, SET_ALL_BOOKING, SET_ALL_PROPERTY, SET_ALL_USER, SET_DASHBOARD_TOTALS
+    SET_ADMIN_LOADING, SET_ALL_AMENITY, SET_ALL_BOOKING, SET_BOOKING_DETAILS, SET_ALL_PROPERTY, SET_ALL_USER, SET_DASHBOARD_TOTALS
 } from "../types/adminTypes";
 import { toast } from 'react-toastify';
 
@@ -129,6 +129,7 @@ export const getAllUser = (data, loading) => async (dispatch) => {
 
 
 export const getAllBooking = (data, loading) => async (dispatch) => {
+    
     loading(true)
     try {
         const response = await Axios.post('/booking/admin/getAll', data, getConfig())
@@ -147,6 +148,31 @@ export const getAllBooking = (data, loading) => async (dispatch) => {
         // toast.error(res.data.message);
     }
 };
+
+
+
+export const getBookingDetails = (data, loading) => async (dispatch) => {
+    
+    loading(true)
+    try {
+        const response = await Axios.get(`/booking/${data}`, data, getConfig())
+        console.log('response======',response.data.data)
+
+        if (response) {
+            dispatch({
+                type: SET_BOOKING_DETAILS,
+                payload: response.data.data
+            })
+            loading(false)
+        } else {
+            loading(false)
+        }
+    } catch (error) {
+        console.log("error", error.response);
+        // toast.error(res.data.message);
+    }
+};
+
 
 
 export const getAllAmenity = (data, loading) => async (dispatch) => {

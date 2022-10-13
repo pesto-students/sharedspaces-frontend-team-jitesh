@@ -20,7 +20,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <LoadScript
-      googleMapsApiKey="AIzaSyCOw_zjoJivNpRyMYlrcyDVTvyyEXgyZFE"
+      googleMapsApiKey="AIzaSyDlRHhAIJy8Sq1_n_1q_9D0YM64-5IGBBM"
       libraries={libraries}
       language="en"
       region="us"
