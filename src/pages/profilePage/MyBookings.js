@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
 import './myBookings.scss'
 import { getMyBookings } from '../../store/actions/siteAction';
 import moment from 'moment'
@@ -10,12 +9,9 @@ import Loader from '../../components/loader/Loader';
 
 const MyBookings = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [values, setValues] = useState({})
     const [visible, setVisible] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const userDetail = useSelector(state => state.site.userDetail)
     const myBookings = useSelector(state => state.site.myBookings)
 
 

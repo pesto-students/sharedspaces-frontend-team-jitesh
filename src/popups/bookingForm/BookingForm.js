@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from "react-modal";
-import { Link, useNavigate } from 'react-router-dom'
-import Loader from "../../components/loader/Loader";
+import { Link } from 'react-router-dom'
 import Input from '../../components/input/Input'
 import Button from "../../components/button/Button";
 import { addBooking } from '../../store/actions/siteAction';
@@ -25,7 +24,6 @@ const customStyles = {
 
 export default function BookingForm({ modalIsOpen, onClose, space }) {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const [values, setValues] = useState({});
     const [loading, setLoading] = useState(false);
     const [bookingCompleted, setBookingCompleted] = useState(false);
@@ -77,7 +75,7 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
                         <h5 class="text-2xl mb-2 font-bold tracking-tight text-gray-900 py-5">
                             Booking Confirmed
                         </h5>
-                        <Link to="/my-booking">
+                        <Link to="/profile/my-bookings">
                             <Button buttonType={"dark-outline"} >Go to My Bookings</Button>
                         </Link>
                     </div>

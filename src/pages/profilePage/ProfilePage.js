@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import './profilePage.scss'
 import { Outlet } from 'react-router-dom'
 import ProfileSidebar from '../../components/profileSidebar/ProfileSidebar'
 import Button from '../../components/button/Button'
 
 const ProfilePage = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const [values, setValues] = useState({})
-    const [loading, setLoading] = useState(false)
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
     const userDetail = useSelector(state => state.site.userDetail)
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
 import './myProfile.scss'
 import Button from "../../components/button/Button";
 import ProfileImageUpload from '../../components/profileImageUpload/ProfileImageUpload';
@@ -11,7 +10,6 @@ import { onUpdateUserProfile } from '../../store/actions/siteAction';
 
 const MyProfile = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const [values, setValues] = useState({})
     const [loading, setLoading] = useState(false)
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)

@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import Button from '../../components/button/Button'
 import ImageUpload from '../../components/imageUpload/ImageUpload'
 import Input from '../../components/input/Input'
-import Textarea from '../../components/textarea/Textarea'
 import { addAmenity } from '../../store/actions/adminAction'
 import './amenityAdd.scss'
 
 const AmenityAdd = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { propertyId } = useParams()
     const [values, setValues] = useState({})
     const [loading, setLoading] = useState(false)
 
