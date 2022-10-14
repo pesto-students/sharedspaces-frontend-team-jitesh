@@ -31,6 +31,7 @@ import AmenityAdd from "./admin/Amenities/AmenityAdd";
 import ProfilePage from "./pages/profilePage/ProfilePage";
 import MyProfile from "./pages/profilePage/MyProfile";
 import MyBookings from "./pages/profilePage/MyBookings";
+import BookingDetails from "./admin/Bookings/BookingDetails";
 import MyLikedProperty from "./pages/profilePage/MyLikedProperty";
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/users" element={<Users />} />
           <Route path="/admin/bookings" element={<Bookings />} />
+          <Route path="/admin/bookings/:bookingId" element={<BookingDetails />} />
           <Route path="/admin/property" element={<PropertyList />} />
           <Route path="/admin/property/add" element={<PropertyAdd />} />
           <Route path="/admin/space/add/:propertyId" element={<SpaceAdd />} />
