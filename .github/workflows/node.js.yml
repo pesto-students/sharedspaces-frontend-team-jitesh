@@ -19,11 +19,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm i
-    - run: npm run build
-    - run: sudo cp -R /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh/build /var/www
+    - name: Build deployment
+      run: sudo cp -R /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh/build /var/www

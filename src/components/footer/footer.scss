@@ -4,4 +4,44 @@
     .logo {
         width: 200px;
     }
+    .footer-with-menu {
+        display: flex;
+        justify-content: space-between;
+    }
+    .right {
+        display: flex;
+        align-items: center;
+        .right-menu {
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    .footer {
+        background-color: black;
+        padding: 20px 20px;
+        .logo {
+            width: 200px;
+        }
+        .footer-with-menu {
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+        }
+        .right {
+            margin-top: 50px;
+            margin-right: 40px;
+            display: flex;
+            align-items: center;
+            .right-menu {
+            }
+        }
+    }
+}
+
+@media (min-width: 961px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
 }

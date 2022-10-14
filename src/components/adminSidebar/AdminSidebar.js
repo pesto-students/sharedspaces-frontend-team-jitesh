@@ -23,7 +23,7 @@ const AdminSidebar = () => {
         },
         {
             name: "Users",
-            icon: "/assets/icons/users.png",
+            icon: "/assets/icons/Users.png",
             link: "/admin/users",
             role: ["Admin"]
         },

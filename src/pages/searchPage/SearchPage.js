@@ -75,7 +75,7 @@ const SearchPage = () => {
     }
     return (
 
-        <div className='search-wrapper flex'>
+        <div className='search-page flex'>
             <div className="left-section hide-scrollbar">
                 <SearchInput value={params.searchKeyword} />
                 <p className='gray-700 py-2'>{allProperties?.length} Property Found</p>
