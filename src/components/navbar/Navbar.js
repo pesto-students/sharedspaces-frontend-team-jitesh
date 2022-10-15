@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import './navbar.scss'
 import AdminNavbar from '../adminNavbar/AdminNavbar';
 import ProfileDropdown from '../profileDropdown/ProfileDropdown'
+import MobileDropdown from '../mobileDropdown/MobileDropdown'
 
 
 export default function Navbar(props) {
@@ -71,7 +72,7 @@ export default function Navbar(props) {
                     <img className='logo' src="/assets/images/logo-black.png" alt="" />
                 </Link>
 
-                <nav className="flex sm:justify-center space-x-4 ml-10">
+                <nav className="menu-list flex sm:justify-center space-x-4 ml-10">
                     {[
                         ['Explore', '/search'],
                         // ['Liked Locations', '/liked-locations'],
@@ -102,6 +103,12 @@ export default function Navbar(props) {
                     </div>}
             </div>
 
+            <div className="mobile-dropdown">
+                {isUserLoggedIn
+                    ? <ProfileDropdown userDetail={userDetail} />
+                    : <MobileDropdown></MobileDropdown>
+                }
+            </div>
         </nav>
     )
 }

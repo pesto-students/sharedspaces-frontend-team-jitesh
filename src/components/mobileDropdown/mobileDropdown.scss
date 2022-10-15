@@ -1,0 +1,29 @@
+.rc-dropdown {
+    font-family: "Poppins", sans-serif;
+}
+
+.mobile-dropdown-body {
+    width: 180px;
+    position: fixed;
+    top: 65px;
+    right: 10px;
+}
+
+@media (max-width: 500px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    .navbar {
+        width: 100%;
+        padding: 20px 20px;
+        .logo {
+            width: 150px;
+        }
+        .left-section {
+        }
+        .right-section {
+            display: none;
+        }
+    }
+}
+@media (min-width: 961px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+}

@@ -17,6 +17,9 @@
             }
         }
     }
+    .mobile-dropdown {
+        display: none;
+    }
 }
 
 .admin-navbar {
@@ -38,9 +41,15 @@
             width: 150px;
         }
         .left-section {
+            .menu-list {
+                display: none;
+            }
         }
         .right-section {
             display: none;
+        }
+        .mobile-dropdown {
+            display: block;
         }
     }
 }

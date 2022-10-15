@@ -12,7 +12,7 @@
             .property-item {
                 margin: 1px 1px 20px 1px;
                 border-radius: 5px;
-                height: 160px;
+                height: 120px;
                 .property-image {
                     width: 250px;
                     height: auto;
@@ -37,7 +37,7 @@
                     flex-direction: column;
                     justify-content: space-between;
                     width: 100%;
-                    padding: 15px 20px;
+                    padding: 10px 20px;
                 }
             }
         }
@@ -56,6 +56,12 @@
         .left-section {
             width: 100%;
             padding: 20px 20px;
+
+            .property-list {
+                .property-item {
+                    height: 150px;
+                }
+            }
         }
         .right-section {
             display: none;
