@@ -33,3 +33,25 @@
         }
     }
 }
+
+@media (max-width: 500px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    .signup-wrapper {
+        width: 100%;
+        .left-section {
+            width: 0%;
+            display: none;
+        }
+        .right-section {
+            width: 100%;
+            padding: 50px 10px;
+            .form-wrapper {
+                padding: 20px 20px;
+            }
+        }
+    }
+}
+
+@media (min-width: 961px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+}

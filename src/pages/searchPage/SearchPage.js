@@ -99,12 +99,13 @@ const SearchPage = () => {
                                     }
                                 </div>
                                 <Link to={`/property/${property._id}`} className="property-description">
-                                    <p className="text-lg font-bold">{property.propertyTitle}</p>
-                                    <p className="text-sm text-gray-500">{property.address}</p>
-
-                                    <hr className="my-3" />
+                                    <div>
+                                        <p className="text-lg font-bold">{property.propertyTitle}</p>
+                                        <p className="text-sm text-gray-500">{property.address}</p>
+                                    </div>
                                     <div className="flex justify-between items-center">
-                                        <p className='text-sm text-gray-500'>{property.spaces.length} Spaces Available</p>  <Button buttonType={"primary"}>Book</Button>
+                                        <p className='text-sm font-bold text-gray-800'>{property.spaces.length} Spaces Available</p>
+                                        {/* <Button buttonType={"primary"}>Book</Button> */}
                                     </div>
                                 </Link>
                             </div>

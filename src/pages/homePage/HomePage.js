@@ -88,7 +88,7 @@ const HomePage = () => {
             <div className="section fade-in-bottom">
               <div className="left-section">
                 <div className="search-with-heading">
-                  <h1 className="text-white text-5xl font-bold py-10 leading-tight">
+                  <h1 className="text-white text-5xl md:text-3x1 font-bold py-10 leading-tight">
                     The  Best Place <br />
                     To Find Your<br />
                     Office Space
