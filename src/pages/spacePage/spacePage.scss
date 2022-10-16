@@ -39,3 +39,31 @@
         }
     }
 }
+
+@media (min-width: 961px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+
+@media (max-width: 500px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+    .space-wrapper {
+        width: 100%;
+        padding: 30px 20px;
+        .space-image-map-section {
+            width: 100%;
+            padding: 30px 0;
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: space-between;
+            .space-description {
+                margin-top: 50px;
+                width: 100%;
+            }
+            .space-image {
+                width: 100%;
+                margin-left: 0px;
+            }
+        }
+    }
+}
