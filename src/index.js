@@ -12,6 +12,7 @@ import store from './store/store'
 import {
   LoadScript,
 } from "@react-google-maps/api";
+import Loader from "./components/loader/Loader";
 
 const libraries = ["places"];
 
@@ -20,10 +21,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <LoadScript
-      googleMapsApiKey="AIzaSyDlRHhAIJy8Sq1_n_1q_9D0YM64-5IGBBM"
+      googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAP_KEY}
       libraries={libraries}
       language="en"
       region="us"
+      loadingElement={<Loader className={"w-10 text-gray-200 mt-20"} />}
     >
       <Provider store={store}>
         <BrowserRouter>
