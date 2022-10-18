@@ -1,4 +1,5 @@
 import Axios from "../../Axios";
+
 import {
   SET_ALL_PROPERTY,
   SET_ALL_SPACE,
@@ -9,6 +10,12 @@ import {
   SET_USER_DETAIL,
 } from "../types/siteTypes";
 import { toast } from 'react-toastify';
+
+
+
+
+
+
 
 
 const getConfig = () => {
@@ -89,6 +96,57 @@ export const onRegister = (data, loading, navigate) => (dispatch) => {
   }
 };
 
+
+export const onSocialLogin = (data, loading, navigate) => (dispatch) => {
+  loading(true)
+  try {
+    Axios.post('/user/social-login', data).then(res => {
+      loading(false);
+      if (res.data.success) {
+        localStorage.setItem("ss_user", JSON.stringify(res.data.data));
+        dispatch({
+          type: SET_USER_DETAIL,
+          payload: res.data.data
+        })
+        navigate()
+        toast.success(res.data.message)
+      } else {
+        toast.error(res.data.message);
+      }
+    });
+  } catch (error) {
+    console.log("error", error.response);
+    // toast.error(res.data.message);
+    loading(false);
+  }
+};
+
+
+//ChangePassword
+export const onChangePassword = (data, loading, navigate) => (dispatch) => {
+  loading(true)
+  try {
+    Axios.post('/user/change-password', data).then(res => {
+      loading(false);
+      if (res.data.success) {
+        localStorage.setItem("ss_user", JSON.stringify(res.data.data));
+        dispatch({
+          type: SET_USER_DETAIL,
+          payload: res.data.data
+        })
+        navigate()
+        toast.success(res.data.message)
+      } else {
+        toast.error(res.data.message);
+      }
+    });
+  } catch (error) {
+    console.log("error", error.response);
+    // toast.error(res.data.message);
+    loading(false);
+  }
+};
+//changePassword end
 
 // SET USER DETAILS
 export const setUserDetail = (data) => (dispatch) => {

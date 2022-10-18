@@ -2,18 +2,35 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './signUpPage.scss'
 import Input from '../../components/input/Input'
+
 import { Link, useNavigate } from 'react-router-dom'
-import { onRegister } from '../../store/actions/siteAction'
+import { onRegister, onSocialLogin } from '../../store/actions/siteAction'
 import { toast } from 'react-toastify';
 import Button from '../../components/button/Button'
+
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../../firebase.config"
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import Loader from '../../components/loader/Loader'
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+
+
 
 const SignUpPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [values, setValues] = useState({});
     const [loading, setLoading] = useState(false);
+    const [googleLoading, setGoogleLoading] = useState(false);
 
     const userDetail = useSelector(state => state.site.userDetail)
+
+
 
     useEffect(() => {
         if (userDetail?.token) {
@@ -52,9 +69,43 @@ const SignUpPage = () => {
         dispatch(
             onRegister(data,
                 (value) => setLoading(value),
-                () => navigate("/"))
+                () => navigate("/")
+
+            )
         )
+
     };
+
+    const signInWithGoogle = () => {
+    setGoogleLoading(true)
+
+
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                let data = {
+                    name: result.user.displayName,
+                    email: result.user.email,
+                    phoneNumber: result.user.phoneNumber,
+                    loginType: "sso",
+                    profileImage: result.user.photoURL
+                }
+
+
+                dispatch(
+                    onSocialLogin(
+                        data,
+                        (value) => setGoogleLoading(value),
+                        () => navigate("/")
+                    )
+                )
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+
+
     return (
         <div className='signup-wrapper flex'>
             <div className="left-section">
@@ -124,13 +175,15 @@ const SignUpPage = () => {
                             Sign Up
                         </Button>
 
-                        <button
+                        <button onClick={signInWithGoogle}
                             className={`
                                social-google-btn w-full my-5 text-black border-2 border-gray-200 hover:bg-gray-200 hover:shadow-sm active:bg-gray-200 active:shadow-sm active:text-white px-6 py-1.5 font-medium rounded shadow-md transition duration-150 cursor-pointer block`
                             }>
-                            <img className='google-icon mr-3' src="/assets/images/google-icon.png" alt="" />
-                            Sign Up with Google
+                            {googleLoading ? <Loader width={"w-5 text-grey-200"}></Loader> : <><img className='google-icon mr-3' src="/assets/images/google-icon.png" alt="" />
+                                Sign Up with Google</>}
+
                         </button>
+
                         <p className='text-center'>Already have an account ? <Link to="/login" className="text-red-500 cursor-pointer">Login</Link> </p>
                     </form>
                 </div>
