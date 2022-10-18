@@ -77,9 +77,7 @@ const SignUpPage = () => {
     };
 
     const signInWithGoogle = () => {
-    setGoogleLoading(true)
-
-
+        setGoogleLoading(true)
         signInWithPopup(auth, provider)
             .then((result) => {
                 let data = {
@@ -175,17 +173,25 @@ const SignUpPage = () => {
                             Sign Up
                         </Button>
 
-                        <button onClick={signInWithGoogle}
-                            className={`
-                               social-google-btn w-full my-5 text-black border-2 border-gray-200 hover:bg-gray-200 hover:shadow-sm active:bg-gray-200 active:shadow-sm active:text-white px-6 py-1.5 font-medium rounded shadow-md transition duration-150 cursor-pointer block`
-                            }>
-                            {googleLoading ? <Loader width={"w-5 text-grey-200"}></Loader> : <><img className='google-icon mr-3' src="/assets/images/google-icon.png" alt="" />
-                                Sign Up with Google</>}
 
-                        </button>
-
-                        <p className='text-center'>Already have an account ? <Link to="/login" className="text-red-500 cursor-pointer">Login</Link> </p>
                     </form>
+
+                    <button onClick={signInWithGoogle}
+                        className={`
+                               social-google-btn w-full my-5 text-black border-2 border-gray-200 hover:bg-gray-200 hover:shadow-sm active:bg-gray-200 active:shadow-sm active:text-white px-6 py-1.5 font-medium rounded shadow-md transition duration-150 cursor-pointer block`
+                        }>
+                        {
+                            googleLoading ?
+                                <Loader width={"w-5"} className="text-gray-300" />
+                                :
+                                <>
+                                    <img className='google-icon mr-3' src="/assets/images/google-icon.png" alt="Sign Up with Google" />
+                                    Sign Up with Google
+                                </>
+                        }
+                    </button>
+
+                    <p className='text-center'>Already have an account ? <Link to="/login" className="text-red-500 cursor-pointer">Login</Link> </p>
                 </div>
             </div>
         </div>

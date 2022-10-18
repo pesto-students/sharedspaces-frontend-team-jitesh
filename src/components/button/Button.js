@@ -5,6 +5,7 @@ import Loader from '../loader/Loader'
 export default function Button({ loading, children, type, buttonType, className, onSubmit, onClick }) {
     return (
         <button
+            data-testid="button"
             type={type}
             onSubmit={onSubmit}
             onClick={onClick}

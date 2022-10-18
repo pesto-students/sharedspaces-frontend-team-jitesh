@@ -3,7 +3,7 @@ import './textarea.scss'
 
 const Textarea = ({ name, value, type, id, placeholder, label, onChange, required, className, rows }) => {
     return (
-        <div className={`textarea-group mb-4 ${className}`}>
+        <div data-testid="textarea" className={`textarea-group mb-4 ${className}`}>
             <label htmlFor={name}>{label}</label>
             <textarea
                 onChange={(e) => onChange(e)}

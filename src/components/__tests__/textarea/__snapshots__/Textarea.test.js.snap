@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test matches snapshot 1`] = `
+<div
+  className="textarea-group mb-4 undefined"
+  data-testid="textarea"
+>
+  <label />
+  <textarea
+    className="border-2 px-2 py-1.5 rounded transition duration-150 ease-in-out focus:border-gray-500"
+    onChange={[Function]}
+    required={true}
+  />
+</div>
+`;
