@@ -3,7 +3,7 @@ import './input.scss'
 
 const Input = ({ name, value, type, id, placeholder, label, onChange, required, className, disabled }) => {
     return (
-        <div className={`input-group mb-4 ${className}`}>
+        <div data-testid="input" className={`input-group mb-4 ${className}`}>
             <label htmlFor={name}>{label}</label>
             <input
                 onChange={(e) => onChange(e)}

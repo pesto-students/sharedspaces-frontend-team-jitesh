@@ -46,7 +46,7 @@ const ImageUpload = ({
     }
 
     return (
-        <div className="upload-wrapper shadow-new rounded">
+        <div data-testid="imageUpload" className="upload-wrapper shadow-new rounded">
             {loading ?
                 <Loader width={"w-10"} className="text-gray-200" /> :
                 <label htmlFor="featured">
