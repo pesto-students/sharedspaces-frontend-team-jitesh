@@ -117,10 +117,6 @@ const PropertyPage = () => {
                             <p className="text-1xl text-gray-500">{property?.propertyDescription}</p>
 
 
-                            <h2 className="text-lg font-bold mt-10 mb-2">Owner Details</h2>
-                            <p className="text-1xl text-gray-500">It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
-
                             <h2 className="text-lg font-bold mt-10">Amenities</h2>
                             <div className="amenity-wrapper flex py-3 mb-10">
                                 {property?.amenities?.map((amenity, key) =>
@@ -140,11 +136,20 @@ const PropertyPage = () => {
                             </div>
 
 
+                            <h2 className="text-lg font-bold mt-10 mb-2">Owner Details</h2>
+                            <div className="flex items-center">
+                                <div>
+                                    <img className='uploaded-image rounded shadow-new' src={property?.ownerDetails?.profileImage || "/assets/images/blank-profile.png"} alt="" />
+                                </div>
+                                <div className='ml-3'>
+                                    <p className="text-1xl text-gray-500"> <b>Name:</b>  {property?.ownerDetails?.name}</p>
+                                    <p className="text-1xl text-gray-500"> <b>Email:</b>  {property?.ownerDetails?.email}</p>
+                                </div>
+                            </div>
+
 
                             <h2 className="text-lg font-bold mt-10 mb-3">Available Spaces</h2>
                             <div className="space-list">
-
-
                                 {property?.spaces?.length > 0 ? property?.spaces?.map(space =>
                                     <Link to={`/space/${propertyId}/${space._id}`} className="space-item">
                                         <img src={space.spaceImage} alt={space.spaceTitle} />
