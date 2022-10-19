@@ -49,6 +49,12 @@
             }
         }
     }
+    .uploaded-image {
+        width: 60px;
+        height: 60px;
+        border-radius: 500px;
+        object-fit: cover;
+    }
 }
 
 @media (min-width: 961px) {

@@ -11,7 +11,7 @@ const SpacePage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { propertyId, spaceId } = useParams();
-    const { space, otherSpaces } = useSelector(state => state.site.space)
+    const { space, otherSpaces, ownerDetails } = useSelector(state => state.site.space)
     const [loading, setLoading] = useState(false)
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
@@ -69,7 +69,15 @@ const SpacePage = () => {
                                 <p className="text-1xl text-gray-500">{space?.spaceDescription}</p>
 
                                 <h2 className="text-lg font-bold mt-10 mb-2">Owner Details</h2>
-                                <p className="text-1xl text-gray-500">It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <div className="flex items-center">
+                                    <div>
+                                        <img className='uploaded-image rounded shadow-new' src={ownerDetails?.profileImage || "/assets/images/blank-profile.png"} alt="" />
+                                    </div>
+                                    <div className='ml-3'>
+                                        <p className="text-1xl text-gray-500"> <b>Name:</b>  {ownerDetails?.name}</p>
+                                        <p className="text-1xl text-gray-500"> <b>Email:</b>  {ownerDetails?.email}</p>
+                                    </div>
+                                </div>
 
 
                                 <h2 className="text-lg font-bold mt-10 mb-3">Other Spaces</h2>
