@@ -82,9 +82,9 @@ const MyBookings = () => {
                             <div className='right-section flex flex-col'>
                                 <p className="text-red-500 font-bold mb-4">Property Details</p>
                                 <div className='flex'>
-                                    <div>
-                                        <img className='w-32 rounded mr-3' src={b?.propertyId?.propertyImage} />
-                                    </div>
+
+                                    <img className='w-32 rounded mr-3' src={b?.propertyId?.propertyImage} />
+
                                     <div className='flex flex-col justify-center'>
                                         <h6 className='font-bold'>{b?.propertyId?.propertyTitle}</h6>
                                         <h6 className='text-sm text-slate-400 mb-4'>{b?.propertyId?.address}</h6>
@@ -92,9 +92,9 @@ const MyBookings = () => {
                                 </div>
                                 <p className="text-red-500 font-bold mb-4 mt-10">Space Details</p>
                                 <div className='flex'>
-                                    <div>
-                                        <img className='w-32 rounded mr-3' src={b?.spaceId?.spaceImage} />
-                                    </div>
+
+                                    <img className='w-32 rounded mr-3' src={b?.spaceId?.spaceImage} />
+
                                     <div className='flex flex-col justify-center'>
                                         <h6 className='font-bold'>{b?.spaceId?.spaceTitle}</h6>
                                         <h6 className='text-sm text-slate-400 mb-4'>{b?.spaceId?.noOfDesks} Desk Available</h6>

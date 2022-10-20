@@ -74,8 +74,6 @@ function App() {
           <Route path="/profile/settings" element={<MyProfile />} />
         </Route>
 
-
-
         {/* // Admin Routes */}
         <Route element={<Admin />} >
           <Route path="/admin/dashboard" element={<Dashboard />} />

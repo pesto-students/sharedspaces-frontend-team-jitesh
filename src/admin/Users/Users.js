@@ -28,14 +28,14 @@ const Users = () => {
                         <Loader width={"w-10"} className={"text-gray-200"} />
                     </div>
                     :
-                    <div class="bg-white shadow-md rounded fade-in-bottom">
+                    <div class="bg-white shadow-md rounded fade-in-bottom mb-10">
                         <table class="min-w-max w-full table-auto">
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                     <th class="py-3 px-4 text-left">Full Name</th>
                                     <th class="py-3 px-4 text-left">Email ID</th>
-                                    <th class="py-3 px-4 text-left">Phone Number</th>
-                                    <th class="py-3 px-4 text-left">Register Date</th>
+                                    <th class="py-3 px-4 text-center">Phone Number</th>
+                                    <th class="py-3 px-4 text-center">Register Date</th>
                                     <th class="py-3 px-4 text-center">Role</th>
                                     <th class="py-3 px-4 text-center">Status</th>
                                     {/* <th class="py-3 px-4 text-center">Actions</th> */}
@@ -55,13 +55,13 @@ const Users = () => {
                                                 <span>{user.email}</span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-4 text-left">
-                                            <div class="flex items-center">
-                                                <span> {user.phoneNumber}</span>
+                                        <td class="py-3 px-4 text-center">
+                                            <div class="flex items-center justify-center">
+                                                <span> {user.phoneNumber || "-"}</span>
                                             </div>
                                         </td>
-                                        <td class="py-3 px-4 text-left">
-                                            <div class="flex items-center">
+                                        <td class="py-3 px-4 text-center">
+                                            <div class="flex items-center justify-center">
                                                 <span>{moment(user.createdAt).format("DD-MM-YYYY")}</span>
                                             </div>
                                         </td>

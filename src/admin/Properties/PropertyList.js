@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropertyAccordion from '../../components/propertyAccordion/PropertyAccordion'
-import { getAllProperty } from '../../store/actions/adminAction'
+import { deleteProperty, deleteSpace, getAllProperty } from '../../store/actions/adminAction'
 import { Link, useParams } from 'react-router-dom'
 import Loader from '../../components/loader/Loader'
 import Button from '../../components/button/Button'
@@ -14,11 +14,30 @@ const PropertyList = () => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        let data = {
-            search: params.searchKeyword
-        }
+        let data = {}
         dispatch(getAllProperty(data, (value) => setLoading(value)))
     }, [params])
+
+    const onDeleteProperty = (propertyId) => {
+        let data = {}
+        dispatch(
+            deleteProperty(
+                propertyId,
+                (value) => setLoading(value),
+                () => dispatch(getAllProperty(data, (value) => setLoading(value)))
+            )
+        )
+    }
+    const onDeleteSpace = (spaceId) => {
+        let data = {}
+        dispatch(
+            deleteSpace(
+                spaceId,
+                (value) => setLoading(value),
+                () => dispatch(getAllProperty(data, (value) => setLoading(value)))
+            )
+        )
+    }
 
     return (
         <div>
@@ -42,7 +61,16 @@ const PropertyList = () => {
                     </div>
                     :
                     allProperties?.map(property => {
-                        return <PropertyAccordion key={property._id} property={property} spaces={property.spaces} />
+                        return (
+                            <PropertyAccordion
+                                key={property._id}
+                                property={property}
+                                spaces={property.spaces}
+                                onDeleteProperty={onDeleteProperty}
+                                onDeleteSpace={onDeleteSpace}
+                            />
+                        )
+
                     })
             }
         </div >

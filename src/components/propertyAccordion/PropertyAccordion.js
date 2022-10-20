@@ -2,8 +2,19 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './propertyAccordion.scss'
 
-const PropertyAccordien = ({ property, spaces }) => {
+const PropertyAccordien = ({ property, spaces, onDeleteProperty, onDeleteSpace }) => {
     const [visible, setVisible] = useState(false)
+
+    const deleteProperty = (propertyId) => {
+        if (window.confirm("Are you sure you want to delete?")) {
+            onDeleteProperty(propertyId)
+        }
+    }
+    const deleteSpace = (spaceId) => {
+        if (window.confirm("Are you sure you want to delete?")) {
+            onDeleteSpace(spaceId)
+        }
+    }
     return (
         <div className={`my-4 rounded shadow-new fade-in-bottom ${visible && false}`} onClick={() => setVisible(!visible)}>
             < div className={`rounded p-3 flex flex-row justify-between transition duration-150 ease-in-out ${visible ? "bg-red-100" : ""}`}>
@@ -20,7 +31,12 @@ const PropertyAccordien = ({ property, spaces }) => {
                 <div className='flex justify-between self-center'>
                     <Link to={`/admin/space/add/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Add Space</Link>
                     <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Edit Property</button>
-                    <button className='bg-red-200 text-red-600 rounded px-2 py-1 ml-3 text-xs hover:bg-red-500 hover:text-white'>Delete Property</button>
+                    <button
+                        className='bg-red-200 text-red-600 rounded px-2 py-1 ml-3 text-xs hover:bg-red-500 hover:text-white'
+                        onClick={() => deleteProperty(property?._id)}
+                    >
+                        Delete Property
+                    </button>
                 </div>
             </div>
             {
@@ -41,7 +57,8 @@ const PropertyAccordien = ({ property, spaces }) => {
                                     </div>
                                     <div className='flex justify-between self-center'>
                                         <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Edit Space</button>
-                                        <button className='bg-red-200 text-red-600 rounded px-2 py-1 ml-3 text-xs hover:bg-red-500 hover:text-white'>Delete Space</button>
+                                        <button className='bg-red-200 text-red-600 rounded px-2 py-1 ml-3 text-xs hover:bg-red-500 hover:text-white'
+                                            onClick={() => deleteSpace(item._id)}>Delete Space</button>
                                     </div>
                                 </div>
                             )
