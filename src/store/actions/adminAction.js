@@ -86,6 +86,26 @@ export const addProperty = (data, loading, navigate) => async (dispatch) => {
     }
 };
 
+export const deleteProperty = (propertyId, loading, success) => async (dispatch) => {
+    loading(true)
+    try {
+        const res = await Axios.delete(`/property/${propertyId}`, getConfig())
+        if (res.data.success) {
+            toast.success(res.data.message);
+            loading(false)
+            await success()
+        } else {
+            toast.error(res.data.message);
+            loading(false)
+        }
+
+    } catch (error) {
+        console.log("error", error.response);
+        loading(false)
+        // toast.error(res.data.message);
+    }
+};
+
 
 export const addSpace = (data, loading, navigate) => async (dispatch) => {
     loading(true)
@@ -106,6 +126,28 @@ export const addSpace = (data, loading, navigate) => async (dispatch) => {
         // toast.error(res.data.message);
     }
 };
+
+
+export const deleteSpace = (spaceId, loading, success) => async (dispatch) => {
+    loading(true)
+    try {
+        const res = await Axios.delete(`/space/${spaceId}`, getConfig())
+        if (res.data.success) {
+            toast.success(res.data.message);
+            loading(false)
+            await success()
+        } else {
+            toast.error(res.data.message);
+            loading(false)
+        }
+
+    } catch (error) {
+        console.log("error", error.response);
+        loading(false)
+        // toast.error(res.data.message);
+    }
+};
+
 
 export const getAllUser = (data, loading) => async (dispatch) => {
     loading(true)
@@ -129,7 +171,7 @@ export const getAllUser = (data, loading) => async (dispatch) => {
 
 
 export const getAllBooking = (data, loading) => async (dispatch) => {
-    
+
     loading(true)
     try {
         const response = await Axios.post('/booking/admin/getAll', data, getConfig())
@@ -152,11 +194,10 @@ export const getAllBooking = (data, loading) => async (dispatch) => {
 
 
 export const getBookingDetails = (data, loading) => async (dispatch) => {
-    
+
     loading(true)
     try {
         const response = await Axios.get(`/booking/${data}`, data, getConfig())
-        console.log('response======',response.data.data)
 
         if (response) {
             dispatch({
@@ -204,6 +245,27 @@ export const addAmenity = (data, loading, navigate) => async (dispatch) => {
             toast.success(res.data.message);
             loading(false)
             navigate()
+        } else {
+            toast.error(res.data.message);
+            loading(false)
+        }
+
+    } catch (error) {
+        console.log("error", error.response);
+        loading(false)
+        // toast.error(res.data.message);
+    }
+};
+
+
+export const deleteAmenity = (amenityId, loading, success) => async (dispatch) => {
+    loading(true)
+    try {
+        const res = await Axios.delete(`/amenity/${amenityId}`, getConfig())
+        if (res.data.success) {
+            toast.success(res.data.message);
+            loading(false)
+            await success()
         } else {
             toast.error(res.data.message);
             loading(false)

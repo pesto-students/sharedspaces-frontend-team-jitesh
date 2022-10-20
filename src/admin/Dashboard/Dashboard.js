@@ -68,7 +68,7 @@ const Dashboard = () => {
                     </div>
             }
 
-            <div className="pt-10">
+            <div className="py-10">
                 <Bookings bookingName="Latest Bookings"></Bookings>
             </div>
         </div>
