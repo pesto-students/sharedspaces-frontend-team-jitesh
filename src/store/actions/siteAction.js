@@ -123,19 +123,15 @@ export const onSocialLogin = (data, loading, navigate) => (dispatch) => {
 
 
 //ChangePassword
-export const onChangePassword = (data, loading, navigate) => (dispatch) => {
+export const onChangePassword = (data, loading, setValues) => (dispatch) => {
   loading(true)
   try {
-    Axios.post('/user/change-password', data).then(res => {
+    Axios.post('/user/change-password', data, getConfig()).then(res => {
       loading(false);
       if (res.data.success) {
-        localStorage.setItem("ss_user", JSON.stringify(res.data.data));
-        dispatch({
-          type: SET_USER_DETAIL,
-          payload: res.data.data
-        })
-        navigate()
+        
         toast.success(res.data.message)
+        setValues()
       } else {
         toast.error(res.data.message);
       }
