@@ -86,6 +86,27 @@ export const addProperty = (data, loading, navigate) => async (dispatch) => {
     }
 };
 
+
+export const updateProperty = (propertyId, data, loading, navigate) => async (dispatch) => {
+    loading(true)
+    try {
+        const res = await Axios.put(`/property/${propertyId}`, data, getConfig())
+        if (res.data.success) {
+            toast.success(res.data.message);
+            loading(false)
+            navigate()
+        } else {
+            toast.error(res.data.message);
+            loading(false)
+        }
+
+    } catch (error) {
+        console.log("error", error.response);
+        loading(false)
+        // toast.error(res.data.message);
+    }
+};
+
 export const deleteProperty = (propertyId, loading, success) => async (dispatch) => {
     loading(true)
     try {

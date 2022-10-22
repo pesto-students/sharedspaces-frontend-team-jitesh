@@ -30,7 +30,7 @@ const PropertyAccordien = ({ property, spaces, onDeleteProperty, onDeleteSpace }
                 </div>
                 <div className='flex justify-between self-center'>
                     <Link to={`/admin/space/add/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Add Space</Link>
-                    <button className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Edit Property</button>
+                    <Link to={`/admin/property/edit/${property?._id}`} className='bg-gray-300 rounded px-2 py-1 ml-3 text-xs hover:bg-gray-900 hover:text-white'>Edit Property</Link>
                     <button
                         className='bg-red-200 text-red-600 rounded px-2 py-1 ml-3 text-xs hover:bg-red-500 hover:text-white'
                         onClick={() => deleteProperty(property?._id)}

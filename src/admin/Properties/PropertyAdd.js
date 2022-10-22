@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import Button from '../../components/button/Button'
 import Input from '../../components/input/Input'
 import PropertyMap from '../../components/propertyMap/propertyMap'
 import Textarea from '../../components/textarea/Textarea'
-import { addProperty, getAllAmenity } from '../../store/actions/adminAction'
+import { addProperty, getAllAmenity, updateProperty } from '../../store/actions/adminAction'
 import {
     GoogleMap,
     LoadScript,
@@ -13,17 +13,21 @@ import {
 } from "@react-google-maps/api";
 import './propertyAdd.scss'
 import ImageUpload from '../../components/imageUpload/ImageUpload'
+import { getProperty } from '../../store/actions/siteAction'
+import { SET_PROPERTY } from '../../store/types/siteTypes'
 
 const PropertyAdd = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const params = useParams()
     const [values, setValues] = useState({})
     const [addressValues, setAddressValues] = useState({})
     const [loading, setLoading] = useState(false)
     const [selectedAmenities, setSelectedAmenities] = useState([])
+    const [isEditView, setIsEditView] = useState(false)
 
     const allAmenities = useSelector(state => state.admin.allAmenities)
-
+    const property = useSelector(state => state.site.property)
 
     useEffect(() => {
         dispatch(getAllAmenity(null, (value) => setLoading(value)))
@@ -32,13 +36,55 @@ const PropertyAdd = () => {
     useEffect(() => {
         if (allAmenities) {
             const amenities = allAmenities.map(a => ({ ...a, selected: false }))
+            console.log('here', amenities)
             setSelectedAmenities(amenities)
         }
 
+
     }, [allAmenities])
 
-    const [searchBox, setSearchBox] = React.useState(null);
-    const [location, setLocation] = React.useState({
+    useEffect(() => {
+        if (params.propertyId) {
+            let data = {
+                propertyId: params.propertyId
+            }
+            dispatch(getProperty(data, (value) => setLoading(value)))
+        } else {
+            dispatch({
+                type: SET_PROPERTY,
+                payload: {}
+            })
+        }
+    }, [params])
+
+    useEffect(() => {
+        if (params.propertyId) {
+            setIsEditView(true)
+            setValues({
+                propertyTitle: property.propertyTitle,
+                propertyDescription: property.propertyDescription,
+                propertyImage: property.propertyImage
+            })
+            setAddressValues({
+                address: property.address,
+                postcode: property.postcode,
+                lat: property.lat,
+                lng: property.lng
+            })
+            setLocation({ lat: parseFloat(property.lat), lng: parseFloat(property.lng) })
+
+            const amenities = allAmenities?.map(a => ({ ...a, selected: property?.amenities?.some(amenity => amenity._id === a._id) }))
+            setSelectedAmenities(
+                amenities
+            )
+        } else {
+            setIsEditView(false)
+        }
+    }, [property])
+
+
+    const [searchBox, setSearchBox] = useState(null);
+    const [location, setLocation] = useState({
         lat: 28.6139391,
         lng: 77.2090212,
     });
@@ -66,13 +112,23 @@ const PropertyAdd = () => {
             amenities: selectedAmenities.filter(a => a.selected && a._id).map(a => a._id)
         }
 
-        dispatch(
-            addProperty(
+        if (isEditView) {
+            dispatch(updateProperty(
+                params.propertyId,
                 data,
                 (value) => setLoading(value),
                 () => navigate("/admin/property")
+            ))
+        } else {
+            dispatch(
+                addProperty(
+                    data,
+                    (value) => setLoading(value),
+                    () => navigate("/admin/property")
+                )
             )
-        )
+        }
+
     }
 
 
@@ -119,12 +175,12 @@ const PropertyAdd = () => {
             <div className="admin-breadcrums mb-3">
                 <Link to="/admin/property" className="heading text-lg font-bold">Properties</Link>
                 <img className='arrow mx-3' src="/assets/icons/chevron-right.png" alt="" />
-                <div className="heading text-lg font-bold">Add Property</div>
+                <div className="heading text-lg font-bold">{isEditView ? "Edit Property" : "Add Property"} </div>
             </div>
 
             <div class="body-section bg-white shadow-new p-5 rounded">
                 <div className="admin-header">
-                    <h1 className="heading text-lg font-bold mb-3">Add Property Details</h1>
+                    <h1 className="heading text-lg font-bold mb-3">{isEditView ? "Edit" : "Add"} Property Details</h1>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="main-wrapper">
@@ -156,6 +212,7 @@ const PropertyAdd = () => {
                                 <ImageUpload
                                     uploadPath={uploadPath}
                                     uploadType="property"
+                                    uploadedImage={values.propertyImage}
                                 // id=""
                                 />
                             </div>
@@ -165,7 +222,7 @@ const PropertyAdd = () => {
 
 
                     <div className="admin-header">
-                        <h1 className="heading text-lg font-bold mt-5 mb-3">Add Address Details</h1>
+                        <h1 className="heading text-lg font-bold mt-5 mb-3">{isEditView ? "Edit" : "Add"} Address Details</h1>
                     </div>
                     <div className="main-wrapper">
                         <div className='left-section'>
@@ -227,11 +284,11 @@ const PropertyAdd = () => {
                     </div>
 
                     <div className="admin-header">
-                        <h1 className="heading text-lg font-bold mt-5 mb-3">Add Amenities Details</h1>
+                        <h1 className="heading text-lg font-bold mt-5 mb-3">{isEditView ? "Edit" : "Add"} Amenities Details</h1>
                     </div>
 
                     <div className="amenity-wrapper flex shadow-new py-3 px-2 rounded mb-10">
-                        {selectedAmenities?.map((amenity, key) =>
+                        {selectedAmenities?.length > 0 && selectedAmenities?.map((amenity, key) =>
                             <div
                                 onClick={() => onSelectAmenity(amenity._id)}
                                 id={amenity._id}
@@ -252,7 +309,7 @@ const PropertyAdd = () => {
                         className="min-w-30"
                         loading={loading}
                     >
-                        Submit
+                        {isEditView ? "Update" : "Submit"}
                     </Button>
                 </form>
             </div>

@@ -87,7 +87,7 @@ const PropertyPage = () => {
                         </Link>
                         <div className="property-image-map-section">
                             <div className="property-image">
-                                <img src={property?.propertyImage} alt={property?.propertyTitle} />
+                                <img src={property?.propertyImage || "/assets/images/image-upload.png"} alt={property?.propertyTitle} />
                             </div>
                             <div className="property-map">
                                 <PropertyMap
