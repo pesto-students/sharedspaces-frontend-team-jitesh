@@ -83,9 +83,12 @@ function App() {
           <Route path="/admin/bookings/:bookingId" element={<BookingDetails />} />
           <Route path="/admin/property" element={<PropertyList />} />
           <Route path="/admin/property/add" element={<PropertyAdd />} />
+          <Route path="/admin/property/edit/:propertyId" element={<PropertyAdd />} />
           <Route path="/admin/space/add/:propertyId" element={<SpaceAdd />} />
+          <Route path="/admin/space/edit/:propertyId/:spaceId" element={<SpaceAdd />} />
           <Route path="/admin/amenities" element={<Amenities />} />
           <Route path="/admin/amenities/add" element={<AmenityAdd />} />
+          <Route path="/admin/amenities/edit/:amenityId" element={<AmenityAdd />} />
         </Route>
       </Routes>
 

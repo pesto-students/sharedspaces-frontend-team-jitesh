@@ -7,7 +7,8 @@ import Loader from "../loader/Loader";
 const ImageUpload = ({
     uploadType,
     id,
-    uploadPath
+    uploadPath,
+    uploadedImage
 }) => {
     const [file, setFile] = useState();
     const [loading, setLoading] = useState(false)
@@ -55,8 +56,7 @@ const ImageUpload = ({
                     ) : (
                         <img
                             className="uploaded-image rounded"
-                            src={"/assets/images/image-upload.png"
-                            }
+                            src={uploadedImage || "/assets/images/image-upload.png"}
                             alt=""
                         />
                     )}
