@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Input from '../../components/input/Input'
 import Button from "../../components/button/Button";
 import { addBooking } from '../../store/actions/siteAction';
+import DatePopover from '../../components/datePopover/DatePopover';
 
 const customStyles = {
     overlay: {
@@ -13,7 +14,7 @@ const customStyles = {
     },
     content: {
         width: "500px",
-        top: "50%",
+        top: "25%",
         left: "50%",
         right: "auto",
         bottom: "auto",
@@ -27,6 +28,13 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
     const [values, setValues] = useState({});
     const [loading, setLoading] = useState(false);
     const [bookingCompleted, setBookingCompleted] = useState(false);
+    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+    const [dates, setDates] = useState({
+        startDate: new Date(new Date().getFullYear(), 0, 1),
+        endDate: new Date(new Date().getFullYear(), 11, 31)
+    });
+
 
     const userDetail = useSelector(state => state.site.userDetail)
 
@@ -41,7 +49,7 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
         e.preventDefault()
 
         const data = {
-            ...values,
+            ...dates,
             userId: userDetail._id,
             propertyId: space.propertyId._id,
             spaceId: space._id,
@@ -60,6 +68,17 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
         setValues({});
         onClose();
     }
+
+    const onSelectDate = dates => {
+        const startDate = new Date(dates.startDate);
+        const endDate = new Date(dates.endDate);
+        const date = {
+            startDate: startDate.toISOString(),
+            endDate: endDate.toISOString()
+        };
+        setDates(date);
+    };
+
 
     return (
         <div>
@@ -90,7 +109,7 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
                             </button>
                         </div>
 
-                        <div className="mb-5">
+                        {/* <div className="mb-5">
                             <h5 class="text-lg font-bold tracking-tight text-gray-900">
                                 Property
                             </h5>
@@ -101,12 +120,21 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
                                 Space
                             </h5>
                             <p>{space.spaceTitle}</p>
-                        </div>
+                        </div> */}
 
                         <form onSubmit={onSubmit}>
                             <div>
                                 <div className="flex">
-                                    <Input
+                                    <DatePopover
+                                        space={space}
+                                        dates={dates}
+                                        onSelectDate={onSelectDate}
+                                        isPopoverOpen={isPopoverOpen}
+                                        setIsPopoverOpen={(value, dates) =>
+                                            setIsPopoverOpen(value, dates)
+                                        }
+                                    />
+                                    {/* <Input
                                         label={"Start Date"}
                                         name={"startDate"}
                                         type="date"
@@ -125,7 +153,7 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
                                         onChange={onInputChange}
                                         className="ml-2"
                                         required
-                                    />
+                                    /> */}
                                 </div>
 
                                 <div className="mt-5">
