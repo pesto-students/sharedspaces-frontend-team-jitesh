@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Modal from "react-modal";
 import { Link } from 'react-router-dom'
-import Input from '../../components/input/Input'
 import Button from "../../components/button/Button";
 import { addBooking } from '../../store/actions/siteAction';
 import DatePopover from '../../components/datePopover/DatePopover';
+import moment from "moment";
+
+import { toast } from 'react-toastify';
 
 const customStyles = {
     overlay: {
@@ -14,7 +16,7 @@ const customStyles = {
     },
     content: {
         width: "500px",
-        top: "25%",
+        top: "40%",
         left: "50%",
         right: "auto",
         bottom: "auto",
@@ -29,6 +31,7 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
     const [loading, setLoading] = useState(false);
     const [bookingCompleted, setBookingCompleted] = useState(false);
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const [isDatesSelected, setIsDatesSelected] = useState(false)
 
     const [dates, setDates] = useState({
         startDate: new Date(new Date().getFullYear(), 0, 1),
@@ -38,15 +41,14 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
 
     const userDetail = useSelector(state => state.site.userDetail)
 
-    const onInputChange = e => {
-        setValues({
-            ...values,
-            [e.target.name]: e.target.value
-        });
 
-    };
     const onSubmit = (e) => {
         e.preventDefault()
+        if (isDatesSelected === false) {
+            toast.error("Please select dates!");
+            return false
+        }
+
 
         const data = {
             ...dates,
@@ -77,6 +79,7 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
             endDate: endDate.toISOString()
         };
         setDates(date);
+        setIsDatesSelected(true)
     };
 
 
@@ -109,66 +112,61 @@ export default function BookingForm({ modalIsOpen, onClose, space }) {
                             </button>
                         </div>
 
-                        {/* <div className="mb-5">
-                            <h5 class="text-lg font-bold tracking-tight text-gray-900">
-                                Property
-                            </h5>
-                            <p>{space.propertyId.propertyTitle}</p>
-                        </div>
-                        <div className="mb-5">
-                            <h5 class="text-lg font-bold tracking-tight text-gray-900">
-                                Space
-                            </h5>
-                            <p>{space.spaceTitle}</p>
-                        </div> */}
-
                         <form onSubmit={onSubmit}>
                             <div>
-                                <div className="flex">
-                                    <DatePopover
-                                        space={space}
-                                        dates={dates}
-                                        onSelectDate={onSelectDate}
-                                        isPopoverOpen={isPopoverOpen}
-                                        setIsPopoverOpen={(value, dates) =>
-                                            setIsPopoverOpen(value, dates)
+                                <div className="flex flex-col">
+                                    <div className="div">
+
+                                        <div className="mt-2 flex justify-between">
+                                            <h5 class="text-lg font-bold tracking-tight text-red-500">
+                                                Booking Date
+                                            </h5>
+                                            <DatePopover
+                                                space={space}
+                                                dates={dates}
+                                                onSelectDate={onSelectDate}
+                                                isPopoverOpen={isPopoverOpen}
+                                                setIsPopoverOpen={(value, dates) =>
+                                                    setIsPopoverOpen(value, dates)
+                                                }
+                                            />
+                                        </div>
+                                        {isDatesSelected
+                                            ? <p class="text-lg font-bold tracking-tight text-gray-900 cursor-pointer">
+                                                From: {moment(dates.startDate).format("DD MMM YYYY")} <br />
+                                                To: {moment(dates.endDate).format("DD MMM YYYY")}
+                                            </p>
+                                            : <p class="text-lg font-bold tracking-tight text-gray-900 cursor-pointer">Please Select Dates</p>
                                         }
-                                    />
-                                    {/* <Input
-                                        label={"Start Date"}
-                                        name={"startDate"}
-                                        type="date"
-                                        value={values.startDate}
-                                        placeholder='Enter Password'
-                                        onChange={onInputChange}
-                                        className="mr-2"
-                                        required
-                                    />
-                                    <Input
-                                        label={"End Date"}
-                                        name={"endDate"}
-                                        type="date"
-                                        value={values.endDate}
-                                        placeholder='Enter Password'
-                                        onChange={onInputChange}
-                                        className="ml-2"
-                                        required
-                                    /> */}
+                                    </div>
+
+                                    <div className="my-4">
+                                        <h5 class="text-lg font-bold tracking-tight text-red-500">
+                                            Property
+                                        </h5>
+                                        <p class="text-lg font-bold">{space.propertyId.propertyTitle}</p>
+                                    </div>
+                                    <div className="mb-4">
+                                        <h5 class="text-lg font-bold tracking-tight text-red-500">
+                                            Space
+                                        </h5>
+                                        <p class="text-lg font-bold">{space.spaceTitle}</p>
+                                    </div>
                                 </div>
 
-                                <div className="mt-5">
+                                <div className="flex mt-5">
                                     <Button
                                         type='submit'
                                         buttonType={"dark"}
                                         onSubmit={onSubmit}
-                                        className="min-w-30"
+                                        className="w-full"
                                         loading={loading}
                                     >
                                         Book
                                     </Button>
                                     <Button
-                                        buttonType={"dark"}
-                                        className="ml-3"
+                                        buttonType={"dark-outline"}
+                                        className="w-full ml-3"
                                         onClick={() => onClose()}
                                     >
                                         Cancel

@@ -44,7 +44,7 @@ const siteReducer = (state = initalState, action) => {
     case SET_MY_BOOKING:
       return {
         ...state,
-        myBookings: action.payload,
+        myBookings: action.payload.reverse(),
       };
     default:
       return state;
