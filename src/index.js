@@ -13,8 +13,21 @@ import {
   LoadScript,
 } from "@react-google-maps/api";
 import Loader from "./components/loader/Loader";
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
 
 const libraries = ["places"];
+
+
+Sentry.init({
+  dsn: "https://46fcfb28730c4649a14a9646c3874ee9@o1379584.ingest.sentry.io/4504061587357696",
+  integrations: [new BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
