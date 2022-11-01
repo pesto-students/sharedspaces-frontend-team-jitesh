@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom';
 const dropdownList = [
     { name: "My Admin", link: "/admin/dashboard", role: ["Admin", "Landlord"] },
     { name: "My Profile", link: "/profile/my-profile", role: ["User", "Landlord"] },
-    { name: "My Bookings", link: "/profile/my-bookings", role: ["User", "Landlord"] },
-    { name: "My Liked Properties", link: "/profile/liked-properties", role: ["User", "Landlord"] },
+    // { name: "My Bookings", link: "/profile/my-bookings", role: ["User", "Landlord"] },
+    // { name: "My Liked Properties", link: "/profile/liked-properties", role: ["User", "Landlord"] },
     { name: "Logout", link: "/Logout", function: () => logout(), role: ["User", "Landlord", "Admin"] },
 ]
 
@@ -55,7 +55,7 @@ const ProfileDropdown = () => {
             onVisibleChange={onVisibleChange}
         >
             <button className='dropdown-wrapper flex items-center h-15 bg-red-100 border-red-500 text-red-500 border-2 px-2 py-1 font-medium rounded shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer'  >
-                <img className='user-image shadow-sm' src={userDetail?.profileImage ? userDetail?.profileImage : "/assets/images/blank-profile.png"} alt={userDetail.name}  referrerpolicy="no-referrer"/>
+                <img className='user-image shadow-sm' src={userDetail?.profileImage ? userDetail?.profileImage : "/assets/images/blank-profile.png"} alt={userDetail.name} referrerpolicy="no-referrer" />
                 {userDetail.name}
                 <img className="logout" src="/assets/icons/logout.png" alt="" />
             </button>

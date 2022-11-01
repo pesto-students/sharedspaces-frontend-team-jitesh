@@ -32,7 +32,7 @@ export default function DateRangePicker({ space, state, onChangeDate }) {
         <DateRange
             editableDateInputs={false}
             minDate={new Date()}
-            maxDate={addDays(new Date(), 60)}
+            maxDate={addDays(new Date(), 365)}
             onChange={item => {
                 onChangeDate([item.selection]);
             }}

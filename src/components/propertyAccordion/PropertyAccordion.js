@@ -20,7 +20,7 @@ const PropertyAccordien = ({ property, spaces, onDeleteProperty, onDeleteSpace }
             < div className={`rounded p-3 flex flex-row justify-between transition duration-150 ease-in-out ${visible ? "bg-red-100" : ""}`}>
                 <div className='flex self-center'>
                     <div >
-                        <img className='w-32 rounded mr-3' src={property?.propertyImage} />
+                        <img className='w-32 rounded mr-3' src={property?.propertyImage || "/assets/images/image-upload.png"} />
                     </div>
                     <div className='text-left'>
                         <h6 className='font-bold text-base'>{property?.propertyTitle}</h6>
@@ -48,7 +48,7 @@ const PropertyAccordien = ({ property, spaces, onDeleteProperty, onDeleteSpace }
                                 <div key={key} className="py-3 px-3 flex justify-between">
                                     <div className='flex item-center'>
                                         <div >
-                                            <img src={item.spaceImage} className='w-24 mr-5 rounded' />
+                                            <img src={item.spaceImage || "/assets/images/image-upload.png"} className='w-24 mr-5 rounded' />
                                         </div>
                                         <div className='self-center'>
                                             <h6 className='font-bold text-base'>{item.spaceTitle}</h6>

@@ -84,7 +84,7 @@ const MyLikedProperty = () => {
                                 <div key={key} className="property-item bg-white shadow-new fade-in-bottom">
                                     <div className="property-image">
                                         <Link to={`/property/${property._id}`}>
-                                            <img src={property.propertyImage} alt={property.propertyTitle} />
+                                            <img src={property.propertyImage || "/assets/images/image-upload.png"} alt={property.propertyTitle} />
                                         </Link>
                                         {isUserLoggedIn ?
                                             property.likedProperty
