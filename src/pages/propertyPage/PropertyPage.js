@@ -152,7 +152,7 @@ const PropertyPage = () => {
                             <div className="space-list">
                                 {property?.spaces?.length > 0 ? property?.spaces?.map(space =>
                                     <Link to={`/space/${propertyId}/${space._id}`} className="space-item">
-                                        <img src={space.spaceImage} alt={space.spaceTitle} />
+                                        <img src={space.spaceImage || "/assets/images/image-upload.png"} alt={space.spaceTitle} />
                                         <div className="space-details">
                                             <p className="text-1xl font-bold">{space.spaceTitle}</p>
                                             <p className="text-sm text-gray-500">{space.noOfDesks} Desks Available</p>

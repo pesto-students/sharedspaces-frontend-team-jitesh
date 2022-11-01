@@ -79,6 +79,32 @@ const LoginPage = () => {
             });
     };
 
+    const loginAsGuestUser = () => {
+        const data = {
+            email: "guestUser@gmail.com",
+            password: "123456"
+        };
+
+        dispatch(
+            onLogin(data,
+                (value) => setLoading(value),
+                () => navigate("/"))
+        )
+    }
+
+    const loginAsGuestLandlord = () => {
+        const data = {
+            email: "guestLandlord@gmail.com",
+            password: "123456"
+        };
+
+        dispatch(
+            onLogin(data,
+                (value) => setLoading(value),
+                () => navigate("/"))
+        )
+    }
+
     return (
         <div className='login-wrapper flex'>
             {/* <ToastContainer /> */}
@@ -142,7 +168,28 @@ const LoginPage = () => {
                     </button>
 
                     <p className='text-center'>Don’t have account ?  <Link to="/sign-up" className="text-red-500 cursor-pointer">Sign up</Link> </p>
+                    <br />
+                    <Button
+
+                        buttonType={"dark"}
+                        onClick={() => loginAsGuestUser(!loading)}
+                        loading={loading}
+                        className={`w-full`}
+                    >
+                        Login as Guest User
+                    </Button>
+
+                    <Button
+                        buttonType={"dark"}
+                        onClick={() => loginAsGuestLandlord(!loading)}
+                        loading={loading}
+                        className={`w-full mt-5`}
+                    >
+                        Login as Guest Landlord
+                    </Button>
+
                 </div>
+
             </div>
 
 
