@@ -21,3 +21,4 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build deployment
       run: sudo cp -R /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh/build /var/www
+      run: sudo cp -R /home/ubuntu/env/frontend/.env /home/ubuntu/frontend/_work/sharedspaces-frontend-team-jitesh/sharedspaces-frontend-team-jitesh
