@@ -5,6 +5,7 @@ import Button from "../../components/button/Button";
 import ProfileImageUpload from '../../components/profileImageUpload/ProfileImageUpload';
 import Input from '../../components/input/Input'
 import { onUpdateUserProfile } from '../../store/actions/siteAction';
+import { Link } from 'react-router-dom';
 
 
 
@@ -142,7 +143,9 @@ const MyProfile = () => {
                         <div className="mb-2">
                             <label className='font-bold'>Password</label>
                         </div>
-                        <Button buttonType="primary-outline">Change password</Button>
+                        <Link to="/profile/change-password">
+                            <Button buttonType="primary-outline">Change password</Button>
+                        </Link>
                     </div>
                 }
             </div>
