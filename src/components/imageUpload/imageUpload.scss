@@ -1,0 +1,34 @@
+.upload-wrapper {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    label {
+        width: 100%;
+        margin: 0;
+    }
+    .upload-icon {
+        width: 100%;
+        height: 250px;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 250px;
+        cursor: pointer;
+    }
+}
+.invisible {
+    visibility: hidden;
+    border: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+}

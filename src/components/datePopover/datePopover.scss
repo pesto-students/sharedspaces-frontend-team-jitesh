@@ -1,0 +1,21 @@
+.date-picker {
+    .rdrDayDisabled::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\7c";
+        color: #ef4444;
+        display: inline-block;
+        transform: rotate(140deg);
+        font-size: 22px;
+        margin-left: 2px;
+        margin-top: 2px;
+        .icon::before {
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            transform: rotate(20deg);
+        }
+    }
+}

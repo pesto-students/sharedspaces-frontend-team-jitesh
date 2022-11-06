@@ -1,0 +1,58 @@
+.navbar {
+    background-color: white;
+    padding: 20px 50px;
+    height: 80px;
+    z-index: 2;
+    .logo {
+        width: 200px;
+    }
+    .left-section {
+    }
+    .right-section {
+        .profile-dropdown {
+            display: flex;
+            align-items: center;
+            .icon {
+                width: 25px;
+            }
+        }
+    }
+    .mobile-dropdown {
+        display: none;
+    }
+}
+
+.admin-navbar {
+    background-color: white;
+    padding: 20px 20px;
+    height: 80px;
+    z-index: 2;
+    .logo {
+        width: 200px;
+    }
+}
+
+@media (max-width: 500px) {
+    /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+    .navbar {
+        width: 100%;
+        padding: 20px 20px;
+        .logo {
+            width: 150px;
+        }
+        .left-section {
+            .menu-list {
+                display: none;
+            }
+        }
+        .right-section {
+            display: none;
+        }
+        .mobile-dropdown {
+            display: block;
+        }
+    }
+}
+@media (min-width: 961px) {
+    /* tablet, landscape iPad, lo-res laptops ands desktops */
+}

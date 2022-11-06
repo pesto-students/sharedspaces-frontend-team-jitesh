@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test matches snapshot 1`] = `
+<nav
+  className="navbar text-gray-800 fixed top-0 left-0 right-0 w-full flex flex-wrap items-center justify-between font-bold shadow-new navbar navbar-expand-lg navbar-light"
+  data-testid="navbar"
+>
+  <div
+    className="left-section flex items-center"
+  >
+    <a
+      href="/"
+      onClick={[Function]}
+    >
+      <img
+        alt=""
+        className="logo"
+        src="/assets/images/logo-black.png"
+      />
+    </a>
+    <nav
+      className="menu-list flex sm:justify-center space-x-4 ml-10"
+    >
+      <a
+        className="rounded px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
+        href="/search"
+        onClick={[Function]}
+      >
+        Explore
+      </a>
+    </nav>
+  </div>
+  <div
+    className="right-section flex items-center"
+  >
+    <button
+      className="
+            btn-wrapper
+        bg-red-500 text-white border-2 border-red-500 hover:bg-red-500 hover:shadow-sm active:bg-red-800 active:shadow-sm active:text-white
+        false
+        false
+        false
+        undefined
+        px-6 py-1.5 font-medium rounded shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer"
+      data-testid="button"
+      onClick={[Function]}
+    >
+      List Your Space
+    </button>
+    <span
+      className="text-gray-200 font-light text-4xl mx-4"
+    >
+      |
+    </span>
+    <div>
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        <button
+          className="
+            btn-wrapper
+        bg-red-500 text-white border-2 border-red-500 hover:bg-red-500 hover:shadow-sm active:bg-red-800 active:shadow-sm active:text-white
+        false
+        false
+        false
+        mr-2
+        px-6 py-1.5 font-medium rounded shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer"
+          data-testid="button"
+        >
+          Login
+        </button>
+      </a>
+      <a
+        href="/sign-up"
+        onClick={[Function]}
+      >
+        <button
+          className="
+            btn-wrapper
+        false
+        bg-white text-red-500 border-red-500 border-2 hover:bg-red-500 hover:text-white hover:shadow-sm active:bg-red-800 active:shadow-sm active:text-white
+        false
+        false
+        ml-2
+        px-6 py-1.5 font-medium rounded shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer"
+          data-testid="button"
+        >
+          Sign Up
+        </button>
+      </a>
+    </div>
+  </div>
+  <div
+    className="mobile-dropdown"
+  >
+    <button
+      className="dropdown-wrapper text-3xl text-red-500 flex items-center h-15 px-2 py-1 transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onTouchStart={[Function]}
+    >
+      <i
+        class="fa-solid fa-bars"
+      />
+    </button>
+  </div>
+</nav>
+`;
