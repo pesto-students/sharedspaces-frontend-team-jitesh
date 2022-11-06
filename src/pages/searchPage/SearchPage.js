@@ -40,6 +40,18 @@ const SearchPage = () => {
             data.userId = getUserId()
         }
         dispatch(getAllProperty(data, (value) => setLoading(value)))
+    }, [])
+
+    useEffect(() => {
+        if (params.searchKeyword) {
+            let data = {
+                search: params.searchKeyword,
+            }
+            if (getUserId()) {
+                data.userId = getUserId()
+            }
+            dispatch(getAllProperty(data, (value) => setLoading(value)))
+        }
     }, [params])
 
     const onLiked = (propertyId) => {
@@ -52,8 +64,8 @@ const SearchPage = () => {
         dispatch(
             onLikedProperty(
                 propertyId,
-                () => dispatch(getAllProperty(data, (value) => setLoading(value))),
-                (value) => setLoading(value)
+                () => dispatch(getAllProperty(data, () => setLoading(false))),
+                (data) => setLoading(false)
             )
         )
     }
@@ -68,8 +80,8 @@ const SearchPage = () => {
         dispatch(
             onUnlikedProperty(
                 propertyId,
-                () => dispatch(getAllProperty(data, (value) => setLoading(value))),
-                (value) => setLoading(value)
+                () => dispatch(getAllProperty(data, () => setLoading(false))),
+                () => setLoading(false)
             )
         )
     }

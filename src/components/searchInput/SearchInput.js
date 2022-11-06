@@ -9,6 +9,9 @@ export default function SearchInput({ value }) {
     return (
         <form onSubmit={(e) => {
             e.preventDefault()
+            if (search === "" || search === " ") {
+                return false
+            }
             navigate(`/search/${search}`)
         }}>
             <div className='search-input-wrapper shadow-new bg-white rounded flex justify-between'>
@@ -17,6 +20,6 @@ export default function SearchInput({ value }) {
                     <Button type={"submit"} buttonType="primary">Search</Button>
                 </Link>
             </div >
-        </form>
+        </form >
     )
 }
