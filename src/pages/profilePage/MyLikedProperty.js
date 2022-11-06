@@ -43,8 +43,8 @@ const MyLikedProperty = () => {
         dispatch(
             onLikedProperty(
                 propertyId,
-                () => dispatch(getAllProperty(data, (value) => setLoading(value))),
-                (value) => setLoading(value)
+                () => dispatch(getAllProperty(data, () => setLoading(false))),
+                () => setLoading(false)
             )
         )
     }
@@ -59,8 +59,8 @@ const MyLikedProperty = () => {
         dispatch(
             onUnlikedProperty(
                 propertyId,
-                () => dispatch(getAllProperty(data, (value) => setLoading(value))),
-                (value) => setLoading(value)
+                () => dispatch(getAllProperty(data, () => setLoading(false))),
+                () => setLoading(false)
             )
         )
     }
