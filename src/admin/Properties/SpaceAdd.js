@@ -5,15 +5,47 @@ import Button from '../../components/button/Button'
 import ImageUpload from '../../components/imageUpload/ImageUpload'
 import Input from '../../components/input/Input'
 import Textarea from '../../components/textarea/Textarea'
-import { addSpace } from '../../store/actions/adminAction'
+import { addSpace, updateSpace } from '../../store/actions/adminAction'
+import { getSpace } from '../../store/actions/siteAction'
+import { SET_SPACE } from '../../store/types/siteTypes'
 import './spaceAdd.scss'
 
 const SpaceAdd = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { propertyId } = useParams()
+    const params = useParams()
+    const { propertyId, spaceId } = params
     const [values, setValues] = useState({})
     const [loading, setLoading] = useState(false)
+    const [isEditView, setIsEditView] = useState(false)
+
+    const space = useSelector(state => state.site.space.space)
+
+    useEffect(() => {
+        if (spaceId) { 
+            dispatch(getSpace(spaceId, (value) => setLoading(value)))
+        } else {
+            dispatch({
+                type: SET_SPACE,
+                payload: {}
+            })
+        }
+    }, [params])
+
+
+    useEffect(() => {
+        if (params.spaceId) {
+            setIsEditView(true)
+            setValues({
+                spaceTitle: space?.spaceTitle,
+                spaceDescription: space?.spaceDescription,
+                noOfDesks: space?.noOfDesks,
+                spaceImage: space?.spaceImage
+            }) 
+        } else {
+            setIsEditView(false)
+        }
+    }, [space])
 
     const onInputChange = e => {
         setValues({
@@ -27,16 +59,26 @@ const SpaceAdd = () => {
 
         const data = {
             ...values,
-            propertyId
+            spaceId
         }
 
-        dispatch(
-            addSpace(
-                data,
-                (value) => setLoading(value),
+        if (isEditView) {
+            dispatch(
+                updateSpace(
+                    params.spaceId,
+                    data,
+                    (value) => setLoading(value),
                 () => navigate("/admin/property")
+            ))
+        } else {
+            dispatch(
+                addSpace(
+                    data,
+                    (value) => setLoading(value),
+                    () => navigate("/admin/property")
+                )
             )
-        )
+        }
     }
 
     const uploadPath = (imagePath) => {
@@ -53,12 +95,14 @@ const SpaceAdd = () => {
             <div className="admin-breadcrums mb-3">
                 <Link to="/admin/property" className="heading text-lg font-bold">Properties</Link>
                 <img className='arrow mx-3' src="/assets/icons/chevron-right.png" alt="" />
-                <div className="heading text-lg font-bold">Add Space</div>
+                <Link to="/admin/property" className="heading text-lg font-bold">Spaces</Link>
+                <img className='arrow mx-3' src="/assets/icons/chevron-right.png" alt="" />
+                <div className="heading text-lg font-bold">{isEditView ? "Edit Space" : "Add Space"} </div>
             </div>
 
             <div class="body-section bg-white shadow-new p-5 rounded">
                 <div className="admin-header">
-                    <h1 className="heading text-lg font-bold mb-3">Add Space Details</h1>
+                    <h1 className="heading text-lg font-bold mb-3">{isEditView ? "Edit" : "Add"} Space Details</h1>
                 </div>
                 <form onSubmit={onSubmit}>
                     <div className="main-wrapper">
@@ -99,6 +143,7 @@ const SpaceAdd = () => {
                                 <ImageUpload
                                     uploadPath={uploadPath}
                                     uploadType="space"
+                                    uploadedImage={values.spaceImage}
                                 // id=""
                                 />
                             </div>
@@ -114,7 +159,7 @@ const SpaceAdd = () => {
                         className="min-w-30"
                         loading={loading}
                     >
-                        Submit
+                        {isEditView ? "Update" : "Submit"} 
                     </Button>
                 </form>
             </div>
