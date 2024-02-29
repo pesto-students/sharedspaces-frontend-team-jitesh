@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test matches snapshot 1`] = `
+<div
+  className="input-group mb-4 undefined"
+  data-testid="input"
+>
+  <label />
+  <input
+    className="border-2 px-2 py-1.5 rounded transition duration-150 ease-in-out focus:border-gray-500"
+    disabled={false}
+    onChange={[Function]}
+    required={true}
+  />
+</div>
+`;

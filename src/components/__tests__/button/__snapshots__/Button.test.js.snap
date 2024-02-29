@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test matches snapshot 1`] = `
+<button
+  className="
+            btn-wrapper
+        false
+        false
+        false
+        false
+        undefined
+        px-6 py-1.5 font-medium rounded shadow-md transition duration-150 ease-in-out  whitespace-nowrap cursor-pointer"
+  data-testid="button"
+/>
+`;

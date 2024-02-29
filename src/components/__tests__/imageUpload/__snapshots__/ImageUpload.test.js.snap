@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test matches snapshot 1`] = `
+<div
+  className="upload-wrapper shadow-new rounded"
+  data-testid="imageUpload"
+>
+  <label
+    htmlFor="featured"
+  >
+    <img
+      alt=""
+      className="uploaded-image rounded"
+      src="/assets/images/image-upload.png"
+    />
+  </label>
+  <input
+    className="invisible"
+    id="featured"
+    onChange={[Function]}
+    type="file"
+  />
+</div>
+`;
