@@ -2,7 +2,7 @@
   "name": "shared-space-client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://ec2-43-205-207-124.ap-south-1.compute.amazonaws.com/",
+  "homepage": "https://shared-space.netlify.app/",
   "dependencies": {
     "@react-google-maps/api": "^2.13.1",
     "@sentry/react": "^7.17.2",
